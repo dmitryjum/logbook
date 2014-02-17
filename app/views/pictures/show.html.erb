@@ -1,2 +1,6 @@
 <%= image_tag @picture.picture_url %>
-<%= button_to "Delete this picture", jump_picture_path(@picture, :id => @picture.id), method: :delete %>
+<form action="/jumps/<%= @picture.jump_id %>/pictures/<%= @picture.id %>" method="POST">
+  <input type="hidden" name="_method" value="DELETE" />
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+  <button>Delete this picture</button>
+  </form>
