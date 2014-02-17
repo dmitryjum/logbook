@@ -1,0 +1,9 @@
+<%= form_for [@jump, @video] do |v| %>
+   <%= v.label :name %>
+  <%= v.text_field :name %>
+
+  <%= v.label :video_url %>
+  <%= v.text_field :video_url %>
+
+  <%= v.submit %>
+<% end %>

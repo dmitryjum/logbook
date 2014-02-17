@@ -1,0 +1,26 @@
+<h2>This is the jump number <%= @jump.jump_number %></h2>
+<ul>
+  <li>Date: <%= @jump.date.to_s %></li>
+  <li>Location: <%= @jump.location %></li>
+  <li>Freefall time: <%= @jump.freefall_time %></li>
+  <li>Equipment: <%= @jump.equipment %></li>
+  <li>Aircraft: <%= @jump.aircraft %></li>
+  <li>Notes: <%= @jump.notes %></li>
+  <li>Exit altitude: <%= @jump.exit_altitude %></li>
+  <li>Total freefall time to date: <%= @jump.total_freefall_time %></li>
+</ul>
+<p><%= link_to "Edit this jump", edit_jump_path(@jump) %></p>
+<% jump_videos = @videos.where(jump_id: @jump.id) %>
+  <% if !jump_videos.empty? %>
+<p><%= link_to "Videos for this jump", jump_videos_path(@jump) %></p>
+  <% else %>
+ <p><%= link_to "Here you can add a video from this jump", new_jump_video_path(@jump) %></p>
+ <% end %>
+<% @pictures.each do |v| %>
+<ol>
+  <li>
+   <a href="/jumps/<%= @jump.id %>/pictures/<%= params[:id] %>"><%= image_tag v.picture_url %></a>
+  </li>
+</ol>
+<% end %>
+<%= button_to "Delete this jump", jump_path(@jump), method: :delete %>
