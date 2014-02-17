@@ -1,0 +1,10 @@
+<h5>Add another picture for this jump</h5>
+<%= form_for [@jump, @picture] do |v| %>
+   <%= v.label :name %>
+  <%= v.text_field :name %>
+
+  <%= v.label :picture_url %>
+  <%= v.text_field :picture_url %>
+
+  <%= v.submit %>
+<% end %>

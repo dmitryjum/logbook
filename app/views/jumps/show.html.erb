@@ -11,15 +11,16 @@
 </ul>
 <p><%= link_to "Edit this jump", edit_jump_path(@jump) %></p>
 <% jump_videos = @videos.where(jump_id: @jump.id) %>
-  <% if !jump_videos.empty? %>
+<% if !jump_videos.empty? %>
 <p><%= link_to "Videos for this jump", jump_videos_path(@jump) %></p>
   <% else %>
  <p><%= link_to "Here you can add a video from this jump", new_jump_video_path(@jump) %></p>
- <% end %>
+<% end %>
+<%= link_to "Add a picture", new_jump_picture_path(@jump) %>
 <% @pictures.each do |v| %>
 <ol>
   <li>
-   <a href="/jumps/<%= @jump.id %>/pictures/<%= params[:id] %>"><%= image_tag v.picture_url %></a>
+   <a href="/jumps/<%= @jump.id %>/pictures/<%= v.id %>"><%= image_tag v.picture_url %></a>
   </li>
 </ol>
 <% end %>
