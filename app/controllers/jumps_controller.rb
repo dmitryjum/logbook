@@ -12,7 +12,7 @@ class JumpsController < ApplicationController
 
   def create
     @jump = @user.jumps.create(jump_params)
-    redirect_to user_jumps_path
+    redirect_to user_jumps_path(params[:user_id])
   end
 
   def show

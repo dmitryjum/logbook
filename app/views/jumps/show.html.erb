@@ -21,7 +21,7 @@
 <% @pictures.each do |v| %>
 <ol>
   <li>
-   <a href="/jumps/<%= @jump.id %>/pictures/<%= v.id %>"><%= image_tag v.picture_url %></a>
+   <a href="<%= @jump.id %>/pictures/<%= v.id %>"><%= image_tag v.picture_url %></a>
   </li>
 </ol>
 <% end %>

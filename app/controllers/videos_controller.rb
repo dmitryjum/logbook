@@ -18,7 +18,7 @@ class VideosController < ApplicationController
 
   def destroy
     @video.destroy
-    redirect_to user_jump_path
+    redirect_to user_jump_path(params[:user_id], params[:jump_id])
   end
 
   private

@@ -11,12 +11,12 @@ class PicturesController < ApplicationController
 
   def create
     @picutre = @jump.pictures.create(picture_params)
-    redirect_to user_jump_path(params[:jump_id])
+    redirect_to user_jump_path(params[:user_id], params[:jump_id])
   end
 
   def destroy
     @picture.destroy
-    redirect_to "/jumps/#{params[:jump_id]}"
+    redirect_to user_jump_path(params[:user_id], params[:jump_id])
   end
 
   private
