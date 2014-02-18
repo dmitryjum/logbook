@@ -10,7 +10,7 @@
   <li>Exit altitude: <%= @jump.exit_altitude %></li>
   <li>Total freefall time to date: <%= @jump.total_freefall_time %></li>
 </ul>
-<p><%= link_to "Edit this jump", edit_user_jump_path %></p>
+<p><%= link_to "Edit this jump", edit_user_jump_path(@user, @jump) %></p>
 <% jump_videos = @videos.where(jump_id: @jump.id) %>
 <% if !jump_videos.empty? %>
 <p><%= link_to "Videos for this jump", user_jump_videos_path(jump_id: @jump.id) %></p>
