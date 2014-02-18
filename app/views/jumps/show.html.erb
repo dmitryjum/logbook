@@ -1,4 +1,4 @@
-<h4><%= link_to "Go back to list of jumps", jumps_path %></h4>
+<h4><%= link_to "Go back to list of jumps", user_jumps_path %></h4>
 <h2>This is the jump number <%= @jump.jump_number %></h2>
 <ul>
   <li>Date: <%= @jump.date.to_s %></li>
@@ -10,14 +10,14 @@
   <li>Exit altitude: <%= @jump.exit_altitude %></li>
   <li>Total freefall time to date: <%= @jump.total_freefall_time %></li>
 </ul>
-<p><%= link_to "Edit this jump", edit_jump_path(@jump) %></p>
+<p><%= link_to "Edit this jump", edit_user_jump_path %></p>
 <% jump_videos = @videos.where(jump_id: @jump.id) %>
 <% if !jump_videos.empty? %>
-<p><%= link_to "Videos for this jump", jump_videos_path(@jump) %></p>
+<p><%= link_to "Videos for this jump", user_jump_videos_path(jump_id: @jump.id) %></p>
   <% else %>
- <p><%= link_to "Here you can add a video from this jump", new_jump_video_path(@jump) %></p>
+ <p><%= link_to "Here you can add a video from this jump", new_user_jump_video_path(jump_id: @jump.id) %></p>
 <% end %>
-<%= link_to "Add a picture", new_jump_picture_path(@jump) %>
+<%= link_to "Add a picture", new_user_jump_picture_path(jump_id: @jump) %>
 <% @pictures.each do |v| %>
 <ol>
   <li>
@@ -25,4 +25,4 @@
   </li>
 </ol>
 <% end %>
-<%= button_to "Delete this jump", jump_path(@jump), method: :delete %>
+<%= button_to "Delete this jump", user_jump_path(@user, @jump), method: :delete %>

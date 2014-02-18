@@ -1,27 +1,31 @@
 class VideosController < ApplicationController
   self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
   self.before_action(:load_jump, {only: [:index, :new, :create]})
-
+  self.before_action(:load_user)
   def index
-    @videos = Video.all
+    @videos = @jump.videos.all
   end
 
   def new
-    @video = Video.new
+    @video = @jump.videos.new
   end
 
   def create
     @video = @jump.videos.create(video_params)
-    redirect_to jump_videos_path
+    redirect_to user_jump_videos_path
   end
 
 
   def destroy
     @video.destroy
-    redirect_to jump_path(params[:jump_id])
+    redirect_to user_jump_path
   end
 
   private
+
+  def load_user
+    return @user = User.find(params[:user_id])
+  end
 
   def load_jump
     return @jump = Jump.find(params[:jump_id])

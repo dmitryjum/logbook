@@ -1,6 +1,7 @@
 class PicturesController < ApplicationController
   self.before_action(:load_picture, { only: [:show, :edit, :update, :destroy] })
   self.before_action(:load_jump, {only: [:new, :create]})
+  self.before_action(:load_user)
   def show
   end
 
@@ -10,7 +11,7 @@ class PicturesController < ApplicationController
 
   def create
     @picutre = @jump.pictures.create(picture_params)
-    redirect_to jump_path(params[:jump_id])
+    redirect_to user_jump_path(params[:jump_id])
   end
 
   def destroy
@@ -19,6 +20,10 @@ class PicturesController < ApplicationController
   end
 
   private
+
+  def load_user
+    return @user = User.find(params[:user_id])
+  end
 
   def load_jump
     return @jump = Jump.find(params[:jump_id])

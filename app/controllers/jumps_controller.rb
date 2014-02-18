@@ -1,17 +1,18 @@
 class JumpsController < ApplicationController
   self.before_action(:load_jump, { only: [:show, :edit, :update, :destroy] })
+  self.before_action(:load_user, {only: [:index, :new, :create, :show]})
 
   def index
-    @jumps = Jump.all
+    @jumps = @user.jumps.all
   end
 
   def new
-    @jump = Jump.new
+    @jump = @user.jumps.new
   end
 
   def create
-    @jump = Jump.create(jump_params)
-    redirect_to jumps_path
+    @jump = @user.jumps.create(jump_params)
+    redirect_to user_jumps_path
   end
 
   def show
@@ -29,10 +30,14 @@ class JumpsController < ApplicationController
 
   def destroy
     @jump.destroy
-    redirect_to jumps_path
+    redirect_to user_jumps_path
   end
 
   private
+
+  def load_user
+    return @user = User.find(params[:user_id])
+  end
 
   def load_jump
     return @jump = Jump.find(params[:id])
@@ -41,7 +46,7 @@ class JumpsController < ApplicationController
   def jump_params
     params.require(:jump).permit(:jump_number, :date, :location,
       :freefall_time, :equipment, :aircraft, :total_freefall_time,
-      :notes)
+      :notes, :user_id)
   end
 
 end
