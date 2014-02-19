@@ -1,7 +1,7 @@
 class JumpsController < ApplicationController
   self.before_action(:load_jump, { only: [:show, :edit, :update, :destroy] })
   self.before_action(:load_user, {only: [:index, :new, :edit, :create, :show]})
-  before_action :authenticate, :authorize, only: [:edit, :update]
+
 
   def index
     @jumps = @user.jumps.all

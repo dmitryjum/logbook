@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+ body {
+
+  background: url(images/wonderful-base-jumping-wallpaper-1440x900-1012168.jpg) no-repeat center center fixed;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ }
