@@ -21,5 +21,5 @@ Authentication and Authorization using [bcrypt-ruby]
 * As a user I can log in, log out with password and email and my profile is secure.
 
 Links:
-#Heroku: http://skydivepages.herokuapp.com/
-#Pivotal Tracker: https://www.pivotaltracker.com/s/projects/1015874
+*Heroku: http://skydivepages.herokuapp.com/
+*Pivotal Tracker: https://www.pivotaltracker.com/s/projects/1015874
