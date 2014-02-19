@@ -1,5 +1,7 @@
 <h1>Welcome to Skydiving Logbook!</h1>
-
+<% if logged_in? %>
+<%= link_to "Go to your logbook", user_jumps_path(@current_user) %>
+<% end %>
 <div class="user_panel">
   <p><%= link_to "Join us!", new_user_path %></p>
 </div>

@@ -30,15 +30,15 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
       :first_name, :last_name, :dob, :license_number)
   end
 
-  def authenticate
-    unless logged_in?
-      redirect_to login_path
-    end
-  end
+  # def authenticate
+  #   unless logged_in?
+  #     redirect_to login_path
+  #   end
+  # end
 
-  def authorize
-    unless current_user == @user
-      redirect_to login_path
-    end
-  end
+  # def authorize
+  #   unless current_user == @user
+  #     redirect_to login_path
+  #   end
+  # end
 end
