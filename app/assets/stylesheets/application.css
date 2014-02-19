@@ -12,12 +12,25 @@
  *= require_tree .
  */
 
- body {
+ html {
 
-  background: url(images/wonderful-base-jumping-wallpaper-1440x900-1012168.jpg) no-repeat center center fixed;
+  background: url("background.jpg") no-repeat center center fixed;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+ }
+
+ header ul li{
+  border: 1px solid;
+  display: inline;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+ }
+
+ .jump_pictures img {
+  width: 200px;
+  border: 5px,solid, #000000;
+  border-radius: 10px;
  }

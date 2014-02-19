@@ -1,5 +1,6 @@
 <h4><%= link_to "Go back to list of jumps", user_jumps_path %></h4>
 <h2>This is the jump number <%= @jump.jump_number %></h2>
+<div class="jump_info">
 <ul>
   <li>Date: <%= @jump.date.to_s %></li>
   <li>Location: <%= @jump.location %></li>
@@ -10,6 +11,7 @@
   <li>Exit altitude: <%= @jump.exit_altitude %></li>
   <li>Total freefall time to date: <%= @jump.total_freefall_time %></li>
 </ul>
+</div>
 <p><%= link_to "Edit this jump", edit_user_jump_path(@user, @jump) %></p>
 <% jump_videos = @videos.where(jump_id: @jump.id) %>
 <% if !jump_videos.empty? %>
@@ -18,11 +20,15 @@
  <p><%= link_to "Here you can add a video from this jump", new_user_jump_video_path(jump_id: @jump.id) %></p>
 <% end %>
 <%= link_to "Add a picture", new_user_jump_picture_path(jump_id: @jump) %>
+
+<table class="jump_pictures">
+  <thead><th style="colspan: 4">My jump Pictures</th></thead>
+  <tr>
 <% @pictures.each do |v| %>
-<ol>
-  <li>
-   <a href="<%= @jump.id %>/pictures/<%= v.id %>"><%= image_tag v.picture_url %></a>
-  </li>
-</ol>
+  
+   <td><a href="<%= @jump.id %>/pictures/<%= v.id %>"><%= image_tag v.picture_url %></a></td>
+  
 <% end %>
+</tr>
+</table>
 <%= button_to "Delete this jump", user_jump_path(@user, @jump), method: :delete %>

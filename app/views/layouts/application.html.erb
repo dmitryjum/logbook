@@ -9,13 +9,15 @@
 <body>
 
   <header>
-    <%= link_to "Home", root_path %>
+    <ul>
+    <li><%= link_to "Home", root_path %></li>
 
     <% if logged_in? %>
-      <p><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></p>
+      <li><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></li>
     <% else %>
-      <p><%= link_to("Please Log In!","/login") %></p>
+      <li><%= link_to("Please Log In!","/login") %></li>
     <% end %>
+  </ul>
   </header>
 
 <%= yield %>
