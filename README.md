@@ -19,3 +19,7 @@ Authentication and Authorization using [bcrypt-ruby]
 * As a user I can add pictures to each particular jump and delete them
 * As a user I can add and delete videos to each particular jump
 * As a user I can log in, log out with password and email and my profile is secure.
+
+Links:
+#Heroku: http://skydivepages.herokuapp.com/
+#Pivotal Tracker: https://www.pivotaltracker.com/s/projects/1015874
