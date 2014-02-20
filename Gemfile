@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry-rails'
 
-gem 'better_errors'
+# gem 'better_errors'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

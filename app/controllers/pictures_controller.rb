@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   self.before_action(:load_picture, { only: [:show, :edit, :update, :destroy] })
-  self.before_action(:load_jump, {only: [:new, :create]})
+  self.before_action(:load_jump, {only: [:show, :new, :create, :destroy]})
   self.before_action(:load_user)
   def show
   end
