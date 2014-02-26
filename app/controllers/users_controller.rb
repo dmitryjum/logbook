@@ -19,9 +19,6 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
   def show
   end
 
-  def show
-  end
-
   def edit
     @update_worked = true
   end

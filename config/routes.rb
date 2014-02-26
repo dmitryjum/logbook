@@ -1,7 +1,8 @@
 Logbook::Application.routes.draw do
   resources :users do
   resources :jumps do
-  resources :pictures, :videos
+  resources :pictures, except: [:index, :new, :edit, :update]
+  resources :videos, except: [:show, :new, :edit, :update]
 end
 end
 
