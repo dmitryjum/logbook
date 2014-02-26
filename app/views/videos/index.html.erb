@@ -1,12 +1,14 @@
 <% jump_videos = @jump.videos.where(jump_id: @jump.id) %>
     <% jump_videos.each do |video| %>
-      <h2> And this is the video from the jump </h2>
+     <h2> And this is the video from the jump </h2>
       <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
-      <form action=<%=user_jump_video_path(user_id: @jump.user_id, jump_id: @jump.id, id: video.id)%> method="POST">
-        <input type="hidden" name="_method" value="DELETE" />
-        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
-        <button>Delete this video</button>
-      </form>
+      
+  <%= button_to "Delete this video", user_jump_video_path(@user, @jump, video), method: :delete, data: {confirm: "Are you sure?"} %>
     <% end %>
-    <h4><%= link_to "Here you can add another video from this jump", new_user_jump_video_path %></h4>
-  <%= link_to "Go back to the jump info", user_jump_path(@user, @jump) %>
+
+<h4>Here you can add another video from this jump</h4>
+
+<%= render "form" %>
+<p>Please enter url from youtube as you see on image below</p>
+<%= image_tag "youtube_url.png" %>
+<p><%= link_to "Go back to the jump info", user_jump_path(@user, @jump) %></p>

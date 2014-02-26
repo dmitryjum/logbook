@@ -1,5 +1,5 @@
 class JumpsController < ApplicationController
-  self.before_action(:load_jump, { only: [:show, :edit, :update, :destroy] })
+  self.before_action(:load_jump, {only: [:show, :edit, :update, :destroy] })
   self.before_action(:load_user, {only: [:index, :show, :new, :edit, :create]})
 
 
@@ -17,6 +17,8 @@ class JumpsController < ApplicationController
   end
 
   def show
+    @picture = Picture.new
+    @jumps = @user.jumps.all
     @videos = Video.all
     @pictures = @jump.pictures.all
   end

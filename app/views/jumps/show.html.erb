@@ -13,25 +13,37 @@
   </ul>
 </div>
 
-<p><%= link_to "Edit this jump", edit_user_jump_path(@user, @jump) %></p>
-
-<% jump_videos = @videos.where(jump_id: @jump.id) %>
-
-<% if !jump_videos.empty? %>
-  <p><%= link_to "Videos for this jump", user_jump_videos_path(jump_id: @jump.id) %></p>
-<% else %>
- <p><%= link_to "Here you can add a video from this jump", new_user_jump_video_path(jump_id: @jump.id) %></p>
+<div class="jump_list">
+<ul>
+<% @jumps.each do |j| %>
+<li><%= link_to j.jump_number, user_jump_path(@user, j) %></li>
 <% end %>
+</ul>
+</div>
+<div class="options">
+  <%= link_to "Add new jump", new_user_jump_path %>
+  <%= link_to "Edit this jump", edit_user_jump_path(@user, @jump) %>
+  <% jump_videos = @videos.where(jump_id: @jump.id) %>
+  <% if !jump_videos.empty? %>
+    <p><%= link_to "Videos for this jump", user_jump_videos_path(jump_id: @jump.id) %></p>
+  <% else %>
+   <p><%= link_to "Here you can add a video from this jump", new_user_jump_video_path(jump_id: @jump.id) %></p>
+  <% end %>
+</div>
 
-<%= link_to "Add a picture", new_user_jump_picture_path(jump_id: @jump) %>
 
-<table class="jump_pictures">
-  <thead><th style="colspan: 4">My jump Pictures</th></thead>
-  <tr>
-    <% @pictures.each do |pic| %>
-      <td><%= link_to image_tag(pic.picture_url), user_jump_picture_path(@user, @jump, pic) %></td>
-    <% end %>
-  </tr>
-</table>
+<div class="jump_pictures">
+  <div class="new_pic_form">
+    <%= render "pictures/form" %>
+  </div>
+  <table >
+    <thead><th style="colspan: 4">My jump Pictures</th></thead>
+    <tr>
+      <% @pictures.each do |pic| %>
+        <td><%= link_to image_tag(pic.picture_url), user_jump_picture_path(@user, @jump, pic) %></td>
+      <% end %>
+    </tr>
+  </table>
+</div>
 
 <%= button_to "Delete this jump", user_jump_path(@user, @jump), method: :delete, data: { confirm: "Are you sure?"} %>

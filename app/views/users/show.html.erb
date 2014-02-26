@@ -4,6 +4,6 @@
 
 <p><%= link_to "Edit My Info", edit_user_path(@user) %></p>
 
-<%= form_tag user_path(@user), method: "delete" do %>
+<%= form_tag user_path(@user), method: "delete",data: { confirm: "Are you sure?"} do %>
   <%= submit_tag("Delete My Account") %>
 <% end %>

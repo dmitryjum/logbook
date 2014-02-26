@@ -1,14 +1,10 @@
 class VideosController < ApplicationController
   self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
-  self.before_action(:load_jump, {only: [:index, :new, :create]})
+  self.before_action(:load_jump, {only: [:index, :new, :create, :destroy]})
   self.before_action(:load_user)
-  before_action :authenticate, :authorize, only: [:edit, :update]
   def index
+    @video = Video.new
     @videos = @jump.videos.all
-  end
-
-  def new
-    @video = @jump.videos.new
   end
 
   def create

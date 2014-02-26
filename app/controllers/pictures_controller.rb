@@ -5,10 +5,6 @@ class PicturesController < ApplicationController
   def show
   end
 
-  def new
-    @picture = Picture.new
-  end
-
   def create
     @picutre = @jump.pictures.create(picture_params)
     redirect_to user_jump_path(params[:user_id], params[:jump_id])
