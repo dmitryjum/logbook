@@ -7,6 +7,10 @@ class VideosController < ApplicationController
     @videos = @jump.videos.all
   end
 
+  def new
+    @video = Video.new
+  end
+
   def create
     @video = @jump.videos.create(video_params)
     redirect_to user_jump_videos_path
