@@ -37,3 +37,14 @@
   border: 5px,solid, #000000;
   border-radius: 10px;
  }
+
+ .jump_info {
+  width: 50%;
+ }
+
+ .jump_list {
+  float: right;
+  margin: -300px 0px 0px 0px;
+ }
+
+
