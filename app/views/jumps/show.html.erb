@@ -1,5 +1,7 @@
 <h4><%= link_to "Go back to list of jumps", user_jumps_path %></h4>
-<h2>This is the jump number <%= @jump.jump_number %></h2>
+<div class="greeting">
+  <h2>This is the jump number <%= @jump.jump_number %></h2>
+</div>
 <div class="jump_info">
   <ul>
     <li>Date: <%= @jump.date.to_s %></li>

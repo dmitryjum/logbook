@@ -1,5 +1,5 @@
 <% @jumps.each do |j| %>
-<li><%= link_to j.jump_number, user_jump_path(@user, j) %></li>
+<li><%= link_to "#{j.jump_number} happened on #{j.date}" , user_jump_path(@user, j) %></li>
 <% end %>
 <br/>
 <%= link_to "Add new jump", new_user_jump_path %>
