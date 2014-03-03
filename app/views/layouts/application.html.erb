@@ -9,15 +9,22 @@
 <body>
 
   <header>
+    <div class="nav-bar">
     <ul>
     <li><%= link_to "Home", root_path %></li>
+    <li><a href="#">About the author</a></li>
+    <li><a href="#">Contact me</a></li>
 
     <% if logged_in? %>
-      <li><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></li>
+    <li><%= link_to "My Logbook", user_jumps_path(current_user) %></li>
+      <li class="right"><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></li>
     <% else %>
-      <li><%= link_to("Please Log In!","/login") %></li>
+      
+      <li class="right"><%= render "session/form" %></li>
+      <li class="right"><%= link_to "Sign up", new_user_path %></li>
     <% end %>
   </ul>
+</div>
   </header>
 
 <%= yield %>

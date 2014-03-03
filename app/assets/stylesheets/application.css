@@ -25,12 +25,18 @@
   color: #D8D8D8;
  }
 
- header ul li{
+ .nav-bar ul li{
   border: 1px solid;
   display: inline;
   padding: 10px;
   background: rgba(0,0,0,0.1);
  }
+
+ .right {
+  float: right;
+  margin-top: -10px;
+ }
+
 
  .jump_pictures img {
   width: 200px;
@@ -44,7 +50,7 @@
 
  .jump_list {
   float: right;
-  margin: -300px 0px 0px 0px;
+  margin: -250px 0px 0px 0px;
  }
 
 

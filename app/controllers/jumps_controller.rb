@@ -27,6 +27,8 @@ class JumpsController < ApplicationController
   end
 
   def update
+    shared_users = User.where(id: params[:jump][:shared_users])
+    @jump.shared_users << shared_users
     @jump.update(jump_params)
     redirect_to user_jumps_path(params[:user_id])
   end

@@ -1,17 +1,17 @@
 require 'spec_helper'
 
 describe "a user can share a jump" do
-   let!(:create) { FactoryGirl.create(:user) }
+   let!(:creator) { FactoryGirl.create(:user) }
    let!(:shared) { FactoryGirl.create(:user) }
    let!(:some_other_user) { FactoryGirl.create(:user) } 
 
-   let!(:jump) { FactoryGirl.create(:jump, user: creator) }
+   let!(:jumpone) { FactoryGirl.create(:jump, user: creator) }
 
    it "can only be seen by people who it is shared with" do
     login(creator)
 
     visit user_jumps_path(creator)
-    click_link jump.jump_number
+    click_link "23 happened on 2014-03-03"
 
     #jump#show
     within ".options" do
@@ -44,7 +44,7 @@ describe "a user can share a jump" do
    end
 
   def login(user)
-    visit "/login"
+    visit("/login")
     fill_in :email, with: user.email
     fill_in :password, with: user.password
     click_button "Log in!"
