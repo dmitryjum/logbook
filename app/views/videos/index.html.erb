@@ -2,13 +2,16 @@
     <% jump_videos.each do |video| %>
      <h2> And this is the video from the jump </h2>
       <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
-      
+
+  <% if current_user.id == @jump.user_id %>     
   <%= button_to "Delete this video", user_jump_video_path(@user, @jump, video), method: :delete, data: {confirm: "Are you sure?"} %>
-    <% end %>
 
-<h4>Here you can add another video from this jump</h4>
+  <h4>Here you can add another video from this jump</h4>
 
-<%= render "form" %>
-<p>Please enter url from youtube as you see on image below</p>
-<%= image_tag "youtube_url.png" %>
+  <%= render "form" %>
+  <p>Please enter url from youtube as you see on image below</p>
+  <%= image_tag "youtube_url.png" %>
+  
+  <% end %>
+<% end %>
 <p><%= link_to "Go back to the jump info", user_jump_path(@user, @jump) %></p>

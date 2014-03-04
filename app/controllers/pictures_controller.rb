@@ -2,6 +2,8 @@ class PicturesController < ApplicationController
   self.before_action(:load_picture, { only: [:show, :edit, :update, :destroy] })
   self.before_action(:load_jump, {only: [:show, :new, :create, :destroy]})
   self.before_action(:load_user)
+  before_action :authenticate, :authorize, only: [:create, :show, :edit, :update, :destroy]
+
   def show
   end
 
@@ -31,5 +33,17 @@ class PicturesController < ApplicationController
 
   def picture_params
     params.require(:picture).permit(:name, :picture_url, :jump_id)
+  end
+
+  def authenticate
+    unless logged_in?
+      redirect_to root_path
+    end
+  end
+
+  def authorize
+    unless current_user == @jump.user_id || action_name == "show"
+      redirect_to root_path
+    end
   end
 end

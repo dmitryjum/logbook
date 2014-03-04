@@ -1,2 +1,8 @@
-<%= image_tag @picture.picture_url %>
-  <%= button_to "Delete this picture", user_jump_picture_path(@user, @jump, @picture), method: :delete, data: { confirm: "Are you sure?"} %>
+<div class="picture_show">
+  <%= image_tag @picture.picture_url %>
+  <% if current_user.id == @jump.user_id %>
+    <%= button_to "Delete this picture",
+     user_jump_picture_path(@user, @jump, @picture),
+      method: :delete, data: { confirm: "Are you sure?"} %>
+  <% end %>
+</div>

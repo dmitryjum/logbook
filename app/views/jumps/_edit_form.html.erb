@@ -1,24 +1,24 @@
 <%= form_for [@user, @jump] do |f| %>
-<p>Enter jump number </p>
-<%= f.number_field :jump_number %>
-<p>Enter the date </p>
-<%= f.date_field :date %>
-<p>Enter location </p>
-<%= f.text_field :location %>
-<p>Enter freefall time</p>
-<%= f.number_field :freefall_time %>
-<p>Enter equipment</p>
-<%= f.text_field :equipment %>
-<p>Enter aircraft</p>
-<%= f.text_field :aircraft %>
-<p>Enter you total freefall time</p>
-<%= f.number_field :total_freefall_time %>
-<p>Add notes</p>
-<%= f.text_field :notes %>
-<p>Add you exit alitutde </p>
-<%= f.number_field :exit_altitude %>
-<p>Choose users you want to share this jump with</p>
-<%= f.select :shared_users,
-options_from_collection_for_select(User.all, :id, :email), {}, { multiple: true} %>
-<%= f.submit %>
+  <p>Enter jump number </p>
+  <%= f.number_field :jump_number %>
+  <p>Enter the date </p>
+  <%= f.date_field :date %>
+  <p>Enter location </p>
+  <%= f.text_field :location %>
+  <p>Enter freefall time</p>
+  <%= f.number_field :freefall_time %>
+  <p>Enter equipment</p>
+  <%= f.text_field :equipment %>
+  <p>Enter aircraft</p>
+  <%= f.text_field :aircraft %>
+  <p>Enter you total freefall time</p>
+  <%= f.number_field :total_freefall_time %>
+  <p>Add notes</p>
+  <%= f.text_field :notes %>
+  <p>Add you exit alitutde </p>
+  <%= f.number_field :exit_altitude %>
+  <p>Choose users you want to share this jump with</p>
+  <%= f.select :shared_users,
+  options_from_collection_for_select(User.all, :id, :email), {}, { multiple: true} %>
+  <%= f.submit %>
 <% end %>

@@ -19,8 +19,20 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  /*width: 960px;*/
  }
 
+ /*.my_jumps tr {
+  display: block;
+ }*/
+
+.my_jumps th{
+  border: 2px solid white;
+  }
+.my_jumps td{
+  border: 2px solid white;
+/*  display: block;
+*/}
  a {
   color: #D8D8D8;
  }
@@ -51,6 +63,17 @@
  .jump_list {
   float: right;
   margin: -250px 0px 0px 0px;
+ }
+
+ .picture_show {
+  position: relative;
+  margin-left: 10%;
+  margin-top: 5%;
+ }
+
+ .picture_show img {
+  height:600px;
+  border-radius: 10px;
  }
 
 

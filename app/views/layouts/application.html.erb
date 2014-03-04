@@ -16,7 +16,7 @@
     <li><a href="#">Contact me</a></li>
 
     <% if logged_in? %>
-    <li><%= link_to "My Logbook", user_jumps_path(current_user) %></li>
+    <li><%= link_to "My profile", user_path(current_user) %></li>
       <li class="right"><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></li>
     <% else %>
       

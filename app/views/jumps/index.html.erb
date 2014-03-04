@@ -1,5 +1,46 @@
-<% @jumps.each do |j| %>
-<li><%= link_to "#{j.jump_number} happened on #{j.date}" , user_jump_path(@user, j) %></li>
-<% end %>
+<h2>Welcome <%= @user.first_name %>!</h2>
 <br/>
-<%= link_to "Add new jump", new_user_jump_path %>
+<div class="user-controls">
+  <ul>
+    <li><%= link_to "Add new jump", new_user_jump_path(@user) %></li>
+    <li><%= link_to "View my logbook", user_jumps_path(@user) %></li>
+    <li><%= link_to "Edit My Info", edit_user_path(@user) %></li>
+    <li><%= form_tag user_path(@user), method: "delete",data: { confirm: "Are you sure?"} do %>
+      <%= submit_tag("Delete My Account") %>
+      <% end %></li>
+  </ul>
+</div>
+<div class="my_jumps">
+  <table>
+    <tr>
+      <thead><th colspan="3">My jumps</th></thead>
+      <th>Jump #</th>
+      <th>Jump Date</th>
+      <th>Dropzone</th>
+    </tr>
+      <% @jumps.each do |j| %>
+    <tr>
+      <td><%= link_to "#{j.jump_number}", user_jump_path(@user, j) %></td>
+      <td><%= j.date %></td>
+      <td><%= j.location %></td>
+    </tr>
+      <% end %>
+  </table>
+</div>
+<div class="shared_jumps">
+  <table>
+    <tr>
+      <thead><th colspan="3">Shared Jumps</th></thead>
+      <th>Jump #</th>
+      <th>Jump Date</th>
+      <th>Dropzone</th>
+    </tr>
+      <% @user.shared_jumps.each do |j| %>
+    <tr>
+      <td><%= link_to "#{j.jump_number}", user_jump_path(@user, j) %></td>
+      <td><%= j.date %></td>
+      <td><%= j.location %></td>
+    </tr>
+      <% end %>
+  </table>
+</div>

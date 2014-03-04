@@ -1,9 +1,12 @@
 <h2>Welcome <%= @user.first_name %>!</h2>
 <br/>
-<%= link_to "View my logbook", user_jumps_path(@user) %>
-
-<p><%= link_to "Edit My Info", edit_user_path(@user) %></p>
-
-<%= form_tag user_path(@user), method: "delete",data: { confirm: "Are you sure?"} do %>
-  <%= submit_tag("Delete My Account") %>
+<div class="user-controls">
+  <ul>
+    <li><%= link_to "Add new jump", new_user_jump_path(@user) %></li>
+    <li><%= link_to "View my logbook", user_jumps_path(@user) %></li>
+    <li><%= link_to "Edit My Info", edit_user_path(@user) %></li>
+    <li><%= form_tag user_path(@user), method: "delete",data: { confirm: "Are you sure?"} do %>
+    <%= submit_tag("Delete My Account") %></li>
+  </ul>
+</div>
 <% end %>

@@ -25,7 +25,9 @@
 
 <div class="options">
   <p><%= link_to "Add new jump", new_user_jump_path %></p>
-  <p><%= link_to "Edit this jump", edit_user_jump_path(@user, @jump) %></p>
+  <% if current_user.id == @jump.user_id %>
+    <p><%= link_to "Edit this jump", edit_user_jump_path(@user, @jump) %></p>
+  <% end %>
   <% jump_videos = @videos.where(jump_id: @jump.id) %>
   <% if !jump_videos.empty? %>
     <p><%= link_to "Videos for this jump", user_jump_videos_path(jump_id: @jump.id) %></p>
@@ -36,11 +38,13 @@
 
 
 <div class="jump_pictures">
-  <div class="new_pic_form">
-    <%= render "pictures/form" %>
-  </div>
+  <% if current_user.id == @jump.user_id %>
+    <div class="new_pic_form">
+      <%= render "pictures/form" %>
+    </div>
+  <% end %>
   <table >
-    <thead><th style="colspan: 4">My jump Pictures</th></thead>
+    <thead><th colspan="4">My jump Pictures</th></thead>
     <tr>
       <% @pictures.each do |pic| %>
         <td><%= link_to image_tag(pic.picture_url), user_jump_picture_path(@user, @jump, pic) %></td>
@@ -48,5 +52,6 @@
     </tr>
   </table>
 </div>
-
+<% if current_user.id == @jump.user_id %>
 <%= button_to "Delete this jump", user_jump_path(@user, @jump), method: :delete, data: { confirm: "Are you sure?"} %>
+<% end %>

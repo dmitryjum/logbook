@@ -1,7 +1,9 @@
 class VideosController < ApplicationController
   self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
-  self.before_action(:load_jump, {only: [:index, :new, :create, :destroy]})
+  self.before_action(:load_jump)
   self.before_action(:load_user)
+  before_action :authenticate, :authorize, only: [:new, :show, :edit, :update, :destroy, :create]
+
   def index
     @video = Video.new
     @videos = @jump.videos.all
@@ -38,5 +40,18 @@ class VideosController < ApplicationController
 
   def video_params
     params.require(:video).permit(:name, :video_url, :jump_id)
+  end
+
+  
+   def authenticate
+    unless logged_in?
+      redirect_to root_path
+    end
+  end
+
+  def authorize
+    unless current_user == @jump.user_id
+      redirect_to root_path
+    end
   end
 end

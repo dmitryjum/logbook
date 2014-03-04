@@ -11,13 +11,16 @@ describe "a user can share a jump" do
     login(creator)
 
     visit user_jumps_path(creator)
-    click_link "23 happened on 2014-03-03"
+    click_link "23"
 
     #jump#show
+
     within ".options" do
       click_link "Edit this jump"
     end
-    select shared.email, from: "Shared"
+    select shared.email, from: "jump_shared_users"
+    # save_and_open_page
+    #binding.pry
     click_button "Update Jump"
 
     logout(creator)
@@ -25,26 +28,26 @@ describe "a user can share a jump" do
 
     visit user_jumps_path(shared)
     within ".shared_jumps" do
-      expect(page).to have_content jump.jump_number
+      expect(page).to have_content jumpone.jump_number
     end
-    click_link jump.jump_number
+    click_link jumpone.jump_number
     within ".greeting" do
-      expect(page).to have_content jump.jump_number
+      expect(page).to have_content jumpone.jump_number
     end
 
     logout(shared)
     login(some_other_user)
 
-    visit user_jumps_path(some_other)
+    visit user_jumps_path(some_other_user)
     within ".shared_jumps" do
-      expect(page).to_not have_content jump.jump_number
+      expect(page).to_not have_content jumpone.jump_number
     end
-    visit user_jump_path(jump)
-    expect(page).to_not have_content jump.jump_number
+    visit user_jump_path(creator, jumpone)
+    expect(page).to_not have_content jumpone.jump_number
    end
 
   def login(user)
-    visit("/login")
+    visit("/")
     fill_in :email, with: user.email
     fill_in :password, with: user.password
     click_button "Log in!"
