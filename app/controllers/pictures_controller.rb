@@ -42,7 +42,7 @@ class PicturesController < ApplicationController
   end
 
   def authorize
-    unless current_user == @jump.user_id || action_name == "show"
+    unless current_user.id == @jump.user_id || action_name == "show"
       redirect_to root_path
     end
   end

@@ -50,7 +50,7 @@ class VideosController < ApplicationController
   end
 
   def authorize
-    unless current_user == @jump.user_id
+    unless current_user.id == @jump.user_id
       redirect_to root_path
     end
   end

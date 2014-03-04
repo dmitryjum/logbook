@@ -3,7 +3,7 @@ class JumpsController < ApplicationController
 
   self.before_action(:load_jump, {only: [:show, :edit, :update, :destroy] })
   self.before_action(:load_user)
-  before_action :authenticate, :authorize, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, :authorize, only: [:index, :show, :edit, :update, :destroy]
 
 
   def index
@@ -73,7 +73,7 @@ class JumpsController < ApplicationController
     # OR the current user has been shared this jump AND this is the show page,
     # redirect to root
     # binding.pry
-    unless (current_user.id == @jump.user_id) || 
+    unless (current_user == @jump || current_user == @user) || 
            (@jump.shared_users.include?(current_user) && action_name == "show")
       redirect_to root_path
     end
