@@ -1,7 +1,8 @@
 class VideosController < ApplicationController
-  self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
-  self.before_action(:load_jump)
   self.before_action(:load_user)
+  self.before_action(:load_jump)
+  self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
+  before_action :authorize_index, only: [:index]
   before_action :authenticate, :authorize, only: [:new, :show, :edit, :update, :destroy, :create]
 
   def index
@@ -45,6 +46,12 @@ class VideosController < ApplicationController
   
    def authenticate
     unless logged_in?
+      redirect_to root_path
+    end
+  end
+
+  def authorize_index
+    unless (current_user == @user)
       redirect_to root_path
     end
   end

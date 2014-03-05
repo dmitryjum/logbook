@@ -42,7 +42,8 @@ class PicturesController < ApplicationController
   end
 
   def authorize
-    unless current_user.id == @jump.user_id || action_name == "show"
+    #first part is to authorize user if he's the owner, second - to authorize only show for anybody else, third, to authrozie "only show" to only shared users
+    unless current_user.id == @jump.user_id || (action_name == "show" && @picture.jump.shared_users.include?(current_user))
       redirect_to root_path
     end
   end

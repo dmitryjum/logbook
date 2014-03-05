@@ -3,8 +3,8 @@ class JumpsController < ApplicationController
 
   self.before_action(:load_jump, {only: [:show, :edit, :update, :destroy] })
   self.before_action(:load_user)
-  before_action :authenticate, :authorize, only: [:index, :show, :edit, :update, :destroy]
-
+  before_action :authorize_index, only: [:index]
+  before_action :authenticate, :authorize, only: [ :show, :edit, :update, :destroy]
 
   def index
     @jumps = @user.jumps.all
@@ -32,8 +32,6 @@ class JumpsController < ApplicationController
 
   def update
     shared_users = User.where(id: params[:jump][:shared_users])
-    # @jump.shared_users << shared_users
-    # binding.pry
     shared_users.each do |user|
       @jump.shared_users << user
     end
@@ -67,13 +65,18 @@ class JumpsController < ApplicationController
       redirect_to root_path
     end
   end
+# write second authorize method to prevent error when I access user.id/jumps with not authorized user
+  def authorize_index
+    unless (current_user == @user)
+      redirect_to root_path
+    end
+  end
 
   def authorize
     # unless this jump belongs to the current_user
     # OR the current user has been shared this jump AND this is the show page,
     # redirect to root
-    # binding.pry
-    unless (current_user == @jump || current_user == @user) || 
+    unless (current_user == @user) || 
            (@jump.shared_users.include?(current_user) && action_name == "show")
       redirect_to root_path
     end
