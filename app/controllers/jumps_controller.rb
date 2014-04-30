@@ -7,6 +7,7 @@ class JumpsController < ApplicationController
   before_action :authenticate, :authorize, only: [ :show, :edit, :update, :destroy]
 
   def index
+    # @posts = Post.all.includes(:author)
     @jumps = @user.jumps.all
   end
 
