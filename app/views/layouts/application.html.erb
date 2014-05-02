@@ -12,8 +12,8 @@
     <div class="nav-bar">
     <ul>
     <li><%= link_to "Home", root_path %></li>
-    <li><a href="#">About the author</a></li>
-    <li><a href="#">Contact me</a></li>
+    <li><%= link_to "About the author", about_author_path %></li>
+    <li><%= link_to "Contact me", contact_me_path %></li>
 
     <% if logged_in? %>
     <li><%= link_to "My profile", user_path(current_user) %></li>

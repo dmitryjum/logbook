@@ -7,6 +7,8 @@ end
 end
 
 # get "/login", to: "session#new"
+get "/about_author", to: "welcome#about_author"
+get "/contact_me", to: "welcome#contact_me"
 post "/session", to: "session#create"
 delete "/session", to: "session#destroy"
 
