@@ -13,8 +13,6 @@ describe "a user can share a jump" do
     visit user_jumps_path(creator)
     click_link "23"
 
-    #jump#show
-
     within ".options" do
       click_link "Edit this jump"
     end
