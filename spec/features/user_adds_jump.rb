@@ -11,7 +11,6 @@ describe "user can add a jump" do
       click_link "Add new jump"
     end
 
-    # save_and_open_page
     add_jump(jumpone)
     within ".my_jumps" do
       expect(page).to have_content jumpone.jump_number

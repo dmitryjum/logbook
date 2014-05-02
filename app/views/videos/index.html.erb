@@ -1,6 +1,6 @@
 <% jump_videos = @jump.videos.where(jump_id: @jump.id) %>
     <% jump_videos.each do |video| %>
-     <h2> And this is the video from the jump </h2>
+     <h3> <%= video.name %> </h3>
       <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
 
   <% if current_user.id == @jump.user_id %>     

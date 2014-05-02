@@ -17,8 +17,7 @@ describe "a user can share a jump" do
       click_link "Edit this jump"
     end
     select shared.email, from: "jump_shared_users"
-    # save_and_open_page
-    #binding.pry
+    
     click_button "Update Jump"
 
     logout(creator)
