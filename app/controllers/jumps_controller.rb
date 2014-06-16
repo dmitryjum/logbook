@@ -1,7 +1,7 @@
 class JumpsController < ApplicationController
   
 
-  self.before_action(:load_jump, {only: [:show, :edit, :update, :destroy] })
+  self.before_action(:load_jump, {only: [:show, :edit, :update, :unshare_jump, :destroy] })
   self.before_action(:load_user)
   before_action :authorize_index, only: [:index]
   before_action :authenticate, :authorize, only: [ :show, :edit, :update, :destroy]
@@ -25,6 +25,7 @@ class JumpsController < ApplicationController
     @jumps = @user.jumps.all
     @videos = Video.all
     @pictures = @jump.pictures.all
+    @jump.shared_users
   end
 
   def edit
@@ -37,6 +38,14 @@ class JumpsController < ApplicationController
       @jump.shared_users << user
     end
     @jump.update(jump_params)
+    redirect_to user_jumps_path(params[:user_id])
+  end
+
+  def unshare_jump
+    jump_user = User.where(id: params[:jump_user_id])
+    @jump.shared_users.each do |user|
+      @jump.shared_users.delete(jump_user)
+    end
     redirect_to user_jumps_path(params[:user_id])
   end
 

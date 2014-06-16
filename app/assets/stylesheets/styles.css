@@ -1,0 +1,68 @@
+body {
+  font-family: serif;
+  color: #FFFFFF;
+  background: url("http://www.toptenz.net/wp-content/uploads/2013/05/skydiving.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*width: 960px;*/
+ }
+
+ /*.my_jumps tr {
+  display: block;
+ }*/
+
+.my_jumps th{
+  border: 2px solid white;
+  }
+.my_jumps td{
+  border: 2px solid white;
+/*  display: block;
+*/}
+ a {
+  color: #D8D8D8;
+ }
+
+ .nav-bar ul li{
+  border: 1px solid;
+  display: inline;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+ }
+
+ .right {
+  float: right;
+  margin-top: -10px;
+ }
+
+
+ .jump_pictures img {
+  width: 200px;
+  border: 5px,solid, #000000;
+  border-radius: 10px;
+ }
+
+ .jump_info {
+  width: 50%;
+ }
+
+ .jump_info > ul {
+  display: inline-block;
+ }
+
+ .jump_list {
+  float: right;
+  margin: -250px 0px 0px 0px;
+ }
+
+ .picture_show {
+  position: relative;
+  margin-left: 10%;
+  margin-top: 5%;
+ }
+
+ .picture_show img {
+  height:600px;
+  border-radius: 10px;
+ }

@@ -6,6 +6,7 @@ Logbook::Application.routes.draw do
 end
 end
 
+get "/users/:user_id/jumps/:id/unshare_jump/:jump_user_id", to: "jumps#unshare_jump"
 # get "/login", to: "session#new"
 get "/about_author", to: "welcome#about_author"
 get "/contact_me", to: "welcome#contact_me"
