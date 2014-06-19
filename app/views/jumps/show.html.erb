@@ -32,7 +32,7 @@
     <p><%= link_to "Videos for this jump", jump_videos_path(@jump) %></p>
   <% else %>
   <% if current_user.id == @jump.user_id %>
-   <p><%= link_to "Here you can add a video from this jump", new_jump_video_path(jump_id: @jump.id) %></p>
+   <p><%= link_to "Here you can add a video from this jump", jump_videos_path(@jump) %></p>
    <% end %>
   <% end %>
 </div>

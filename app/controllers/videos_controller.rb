@@ -1,6 +1,7 @@
 class VideosController < ApplicationController
   self.before_action(:load_jump)
   self.before_action(:load_user)
+  self.before_action(:converturl, only: :create)
   self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
   before_action :authorize_index, only: [:index]
   before_action :authenticate, :authorize, only: [:new, :destroy, :create]
@@ -43,8 +44,12 @@ class VideosController < ApplicationController
     params.require(:video).permit(:name, :video_url, :jump_id)
   end
 
+  def converturl
+    url = params[:video][:video_url]
+    params[:video][:video_url] = url.gsub "watch?v=", "embed/"
+  end
   
-   def authenticate
+  def authenticate
     unless logged_in?
       redirect_to root_path
     end
