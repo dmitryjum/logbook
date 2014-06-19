@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   self.before_action(:load_jump)
   self.before_action(:load_user)
   self.before_action(:converturl, only: :create)
-  self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
+  self.before_action(:load_video, only: :destroy)
   before_action :authorize_index, only: [:index]
   before_action :authenticate, :authorize, only: [:new, :destroy, :create]
 
