@@ -18,6 +18,10 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
   end
 
   def show
+    @jumps = Jump.all
+    @date = Date.today
+    # binding.pry
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
   end
 
   def edit

@@ -3,10 +3,10 @@
      <h3> <%= video.name %> </h3>
       <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
 
-  <% if current_user.id == @jump.user_id %>     
-  <%= button_to "Delete this video", user_jump_video_path(@user, @jump, video), method: :delete, data: {confirm: "Are you sure?"} %>
+  <% if current_user.id == @jump.user_id %> 
+  <%= button_to "Delete this video", video_path(video, jump_id: video.jump_id), method: :delete, data: {confirm: "Are you sure?"} %>
 
-  <h4>Here you can add another video from this jump</h4>
+    <h4>Here you can add another video from this jump</h4>
 
   <%= render "form" %>
   <p>Please enter url from youtube as you see on image below</p>
@@ -14,4 +14,4 @@
   
   <% end %>
 <% end %>
-<p><%= link_to "Go back to the jump info", user_jump_path(@user, @jump) %></p>
+<p><%= link_to "Go back to the jump info", jump_path(@jump) %></p>

@@ -1,9 +1,9 @@
 class VideosController < ApplicationController
-  self.before_action(:load_user)
   self.before_action(:load_jump)
+  self.before_action(:load_user)
   self.before_action(:load_video, { only: [:show, :edit, :update, :destroy]})
   before_action :authorize_index, only: [:index]
-  before_action :authenticate, :authorize, only: [:new, :show, :edit, :update, :destroy, :create]
+  before_action :authenticate, :authorize, only: [:new, :destroy, :create]
 
   def index
     @video = Video.new
@@ -16,19 +16,19 @@ class VideosController < ApplicationController
 
   def create
     @video = @jump.videos.create(video_params)
-    redirect_to user_jump_videos_path
+    redirect_to jump_videos_path
   end
 
 
   def destroy
     @video.destroy
-    redirect_to user_jump_path(params[:user_id], params[:jump_id])
+    redirect_to jump_videos_path(@jump.id)
   end
 
   private
 
   def load_user
-    return @user = User.find(params[:user_id])
+    return @user = User.find(@jump.user_id)
   end
 
   def load_jump
@@ -51,7 +51,7 @@ class VideosController < ApplicationController
   end
 
   def authorize_index
-    unless (current_user == @user)
+    unless (current_user == @user) || (action_name == "index" && @jump.shared_users.include?(current_user))
       redirect_to root_path
     end
   end

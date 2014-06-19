@@ -1,13 +1,11 @@
 class JumpsController < ApplicationController
-  
-
-  self.before_action(:load_jump, {only: [:show, :edit, :update, :unshare_jump, :destroy] })
-  self.before_action(:load_user)
-  before_action :authorize_index, only: [:index]
+  self.before_action(:load_jump, {only: [:show, :edit, :update, :unshare, :destroy] })
+  self.before_action(:load_user, {only: [:index, :new, :create]})
+  self.before_action(:load_jump_user, {only: [:show, :edit, :update, :unshare, :destroy]})
+  before_action :authorize_index, only: [:index, :new]
   before_action :authenticate, :authorize, only: [ :show, :edit, :update, :destroy]
 
   def index
-    # @posts = Post.all.includes(:author)
     @jumps = @user.jumps.all
   end
 
@@ -21,8 +19,8 @@ class JumpsController < ApplicationController
   end
 
   def show
+    @user = User.find_by(id: @jump.user_id)
     @picture = Picture.new
-    @jumps = @user.jumps.all
     @videos = Video.all
     @pictures = @jump.pictures.all
     @jump.shared_users
@@ -38,26 +36,31 @@ class JumpsController < ApplicationController
       @jump.shared_users << user
     end
     @jump.update(jump_params)
-    redirect_to user_jumps_path(params[:user_id])
+    redirect_to jump_path
   end
 
-  def unshare_jump
+  def unshare
     jump_user = User.where(id: params[:jump_user_id])
     @jump.shared_users.each do |user|
       @jump.shared_users.delete(jump_user)
     end
-    redirect_to user_jumps_path(params[:user_id])
+    redirect_to jump_path
   end
 
   def destroy
+    @user = @jump.user_id
     @jump.destroy
-    redirect_to user_jumps_path
+    redirect_to user_jumps_path(@user)
   end
 
   private
 
   def load_user
     return @user = User.find(params[:user_id])
+  end
+
+  def load_jump_user
+    return @user = User.find_by(id: @jump.user_id)
   end
 
   def load_jump

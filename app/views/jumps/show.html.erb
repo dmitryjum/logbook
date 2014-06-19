@@ -1,4 +1,4 @@
-<h4><%= link_to "Go back to list of jumps", user_jumps_path %></h4>
+<h4><%= link_to "Go back to list of jumps", user_jumps_path(@user) %></h4>
 <div class="greeting">
   <h2>This is the jump number <%= @jump.jump_number %></h2>
 </div>
@@ -16,22 +16,24 @@
   <% if current_user.id == @jump.user_id %>
     <ul class="jump-info-cell">
       <% @jump.shared_users.each do |user| %>
-        <li>Shared user name: <%= user.first_name %><a href="/users/<%= params[:user_id] %>/jumps/<%= params[:id] %>/unshare_jump/<%= user.id %>"> X</a></li>
+        <li>Shared user name: <%= user.first_name %><%= link_to "X", unshare_jump_path(@jump, jump_user_id: user.id) %></li>
       <% end %>
     </ul>
   <% end %>
 </div>
 
 <div class="options">
-  <p><%= link_to "Add new jump", new_user_jump_path %></p>
+  <p><%= link_to "Add new jump", new_user_jump_path(@user) %></p>
   <% if current_user.id == @jump.user_id %>
-    <p><%= link_to "Edit this jump", edit_user_jump_path(@user, @jump) %></p>
+    <p><%= link_to "Edit this jump", edit_jump_path(@jump) %></p>
   <% end %>
   <% jump_videos = @videos.where(jump_id: @jump.id) %>
   <% if !jump_videos.empty? %>
-    <p><%= link_to "Videos for this jump", user_jump_videos_path(jump_id: @jump.id) %></p>
+    <p><%= link_to "Videos for this jump", jump_videos_path(@jump) %></p>
   <% else %>
-   <p><%= link_to "Here you can add a video from this jump", new_user_jump_video_path(jump_id: @jump.id) %></p>
+  <% if current_user.id == @jump.user_id %>
+   <p><%= link_to "Here you can add a video from this jump", new_jump_video_path(jump_id: @jump.id) %></p>
+   <% end %>
   <% end %>
 </div>
 
@@ -46,11 +48,11 @@
     <thead><th colspan="4">My jump Pictures</th></thead>
     <tr>
       <% @pictures.each do |pic| %>
-        <td><p><%= pic.name %></p><p><%= link_to image_tag(pic.picture_url), user_jump_picture_path(@user, @jump, pic) %></p></td>
+        <td><p><%= pic.name %></p><p><%= link_to image_tag(pic.picture_url), picture_path(pic, jump_id: @jump.id) %></p></td>
       <% end %>
     </tr>
   </table>
 </div>
 <% if current_user.id == @jump.user_id %>
-<%= button_to "Delete this jump", user_jump_path(@user, @jump), method: :delete, data: { confirm: "Are you sure?"} %>
+<%= button_to "Delete this jump", jump_path(@jump, user_id: @user.id), method: :delete, data: { confirm: "Are you sure?"} %>
 <% end %>

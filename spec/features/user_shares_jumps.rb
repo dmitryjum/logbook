@@ -39,7 +39,7 @@ describe "a user can share a jump" do
     within ".shared_jumps" do
       expect(page).to_not have_content jumpone.jump_number
     end
-    visit user_jump_path(creator, jumpone)
+    visit jump_path(jumpone)
     expect(page).to_not have_content jumpone.jump_number
    end
 

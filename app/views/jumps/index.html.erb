@@ -20,7 +20,7 @@
     </tr>
       <% @jumps.each do |j| %>
     <tr>
-      <td><%= link_to "#{j.jump_number}", user_jump_path(@user, j) %></td>
+      <td><%= link_to "#{j.jump_number}", jump_path(j) %></td>
       <td><%= j.date %></td>
       <td><%= j.location %></td>
     </tr>
@@ -37,7 +37,7 @@
     </tr>
       <% @user.shared_jumps.each do |j| %>
     <tr>
-      <td><%= link_to "#{j.jump_number}", user_jump_path(@user, j) %></td>
+      <td><%= link_to "#{j.jump_number}", jump_path(j) %></td>
       <td><%= j.date %></td>
       <td><%= j.location %></td>
     </tr>

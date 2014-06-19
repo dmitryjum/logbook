@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry-rails'
 
+# calendar for rails
+gem "watu_table_builder", :require => "table_builder"
+
 # gem 'better_errors'
 
 ruby '2.1.0'

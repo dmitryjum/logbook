@@ -5,8 +5,22 @@
     <li><%= link_to "Add new jump", new_user_jump_path(@user) %></li>
     <li><%= link_to "View my logbook", user_jumps_path(@user) %></li>
     <li><%= link_to "Edit My Info", edit_user_path(@user) %></li>
-    <li><%= form_tag user_path(@user), method: "delete",data: { confirm: "Are you sure?"} do %>
-    <%= submit_tag("Delete My Account") %></li>
+    <li><%= link_to "Delete my account", user_path(@user), method: :delete, data: { confirm: "Are you sure?"} %></li>
   </ul>
 </div>
-<% end %>
+<div id="calendar">
+  <h2 id="month">
+    <%=h @date.strftime("%B %Y") %>
+  </h2>
+  <%= calendar_for @jumps, :year => @date.year, :month => @date.month do |calendar| %>
+  <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+    <%= calendar.day(:day_method => :date) do |date, jumps| %>
+      <%= date.day %>
+      <ul>
+        <% jumps.each do |j| %>
+          <li><%= link_to "#{j.jump_number}", jump_path(j) %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

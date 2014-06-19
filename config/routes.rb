@@ -1,15 +1,14 @@
 Logbook::Application.routes.draw do
-  resources :users do
-  resources :jumps do
+  resources :users, except: [:index] do
+  resources :jumps, shallow: true do
+    member do
+      get :unshare
+    end
   resources :pictures, except: [:index, :new, :edit, :update]
   resources :videos, except: [:show, :edit, :update]
 end
 end
 
-get "/users/:user_id/jumps/:id/unshare_jump/:jump_user_id", to: "jumps#unshare_jump"
-# get "/login", to: "session#new"
-get "/about_author", to: "welcome#about_author"
-get "/contact_me", to: "welcome#contact_me"
 post "/session", to: "session#create"
 delete "/session", to: "session#destroy"
 

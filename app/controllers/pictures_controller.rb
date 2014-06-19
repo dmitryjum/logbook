@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
   self.before_action(:load_picture, { only: [:show, :edit, :update, :destroy] })
   self.before_action(:load_jump, {only: [:show, :new, :create, :destroy]})
-  self.before_action(:load_user)
+  self.before_action(:load_user, {except: [:show, :destroy, :create]})
   before_action :authenticate, :authorize, only: [:create, :show, :edit, :update, :destroy]
 
   def show
@@ -9,12 +9,12 @@ class PicturesController < ApplicationController
 
   def create
     @picutre = @jump.pictures.create(picture_params)
-    redirect_to user_jump_path(params[:user_id], params[:jump_id])
+    redirect_to jump_path(params[:jump_id])
   end
 
   def destroy
     @picture.destroy
-    redirect_to user_jump_path(params[:user_id], params[:jump_id])
+    redirect_to jump_path(params[:jump_id])
   end
 
   private

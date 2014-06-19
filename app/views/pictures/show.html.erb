@@ -2,7 +2,7 @@
   <%= image_tag @picture.picture_url %>
   <% if current_user.id == @jump.user_id %>
     <%= button_to "Delete this picture",
-     user_jump_picture_path(@user, @jump, @picture),
+     picture_path(@picture, jump_id: params[:jump_id]),
       method: :delete, data: { confirm: "Are you sure?"} %>
   <% end %>
 </div>
