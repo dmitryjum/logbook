@@ -19,7 +19,6 @@ class JumpsController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: @jump.user_id)
     @picture = Picture.new
     @videos = Video.all
     @pictures = @jump.pictures.all
