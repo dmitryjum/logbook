@@ -1,4 +1,4 @@
-<h4><%= link_to "Go back to list of jumps", user_jumps_path(@user) %></h4>
+<h4><%= link_to "Go back to list of jumps", user_jumps_path(current_user) %></h4>
 <div class="greeting">
   <h2>This is the jump number <%= @jump.jump_number %></h2>
 </div>
@@ -23,7 +23,7 @@
 </div>
 
 <div class="options">
-  <p><%= link_to "Add new jump", new_user_jump_path(@user) %></p>
+  <p><%= link_to "Add new jump", new_user_jump_path(current_user) %></p>
   <% if current_user.id == @jump.user_id %>
     <p><%= link_to "Edit this jump", edit_jump_path(@jump) %></p>
   <% end %>
