@@ -9,18 +9,5 @@
   </ul>
 </div>
 <div id="calendar">
-  <h2 id="month">
-    <%=h @date.strftime("%B %Y") %>
-  </h2>
-  <%= calendar_for @jumps, :year => @date.year, :month => @date.month do |calendar| %>
-  <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
-    <%= calendar.day(:day_method => :date) do |date, jumps| %>
-      <%= date.day %>
-      <ul>
-        <% jumps.each do |j| %>
-          <li><%= link_to "#{j.jump_number}", jump_path(j) %></li>
-        <% end %>
-      </ul>
-    <% end %>
-  <% end %>
+  
 </div>
