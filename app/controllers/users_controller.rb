@@ -19,9 +19,6 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
 
   def show
     @jumps = Jump.all
-    # @date = Date.today
-    # binding.pry
-    # @date = params[:month] ? Date.parse(params[:month]) : Date.today
   end
 
   def edit
@@ -43,6 +40,7 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
     session.destroy
     redirect_to root_path
   end
+
 
   private
 

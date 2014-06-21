@@ -15,6 +15,4 @@ class Jump < ActiveRecord::Base
     date
   end
   
-  # scope :mine, -> {unless self.length < 1; where(user_id: current_user.id).length; end }
-
 end

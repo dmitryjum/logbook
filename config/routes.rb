@@ -4,6 +4,9 @@ Logbook::Application.routes.draw do
     member do
       get :unshare
     end
+    collection do
+      get :jumps_of_the_day
+    end
   resources :pictures, except: [:index, :new, :edit, :update]
   resources :videos, except: [:show, :edit, :update]
 end

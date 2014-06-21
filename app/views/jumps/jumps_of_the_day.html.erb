@@ -1,0 +1,6 @@
+<h2>These are the jumps for this day: </h2>
+<ul>
+  <% @my_jumps.each do |j| %>
+  <li><%= link_to "Jump#  #{j.jump_number}. Location: #{j.location}", jump_path(j) %></li>
+  <% end %>
+</ul>
