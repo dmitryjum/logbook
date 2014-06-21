@@ -14,5 +14,7 @@ class Jump < ActiveRecord::Base
   def start_time
     date
   end
-  
+
+  scope :mine, lambda {|param, user| where(date: param).select {|jump| jump.user_id == user}}
+  scope :others, lambda {|param, user| where(date: param).select {|jump| jump.user_id != user}}
 end

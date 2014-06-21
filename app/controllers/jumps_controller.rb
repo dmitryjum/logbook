@@ -53,10 +53,8 @@ class JumpsController < ApplicationController
   end
 
   def jumps_of_the_day
-    @jumps = Jump.all
-    @my_jumps = Jump.all.where(user_id: @user.id ,date: params[:date])
-    @other_jumps = Jump.all.where.not(user_id: @user.id) && Jump.all.where(date: params[:date])
-    binding.pry
+    @my_jumps = Jump.all.mine(params[:date], @user.id)
+    @other_jumps = Jump.all.others(params[:date], @user.id)
   end
 
 

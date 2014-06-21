@@ -11,18 +11,15 @@
 <div id="calendar">
 <%= month_calendar events: @jumps do |date, events| %>
   <%= date.day %>
-  <% myjumps = events.select {|jump| jump.user_id == current_user.id} %>
+  <% my_jumps = events.select {|jump| jump.user_id == current_user.id} %>
+  <% other_jumps = events.select {|jump| jump.user_id != current_user.id} %>
   <ul>
-    <% if myjumps.length > 0 %>
-      <li><%= link_to "My jumps: #{myjumps.length}", jumps_of_the_day_user_jumps_path(@user, date: date, owner: "mine") %></li>
-    <% else %>
-      <li>My jumps: <%= myjumps.length %></li>
+    <% if my_jumps.length > 0 %>
+      <li><%= link_to "My jumps: #{my_jumps.length}", jumps_of_the_day_user_jumps_path(@user, date: date, owner: "mine") %></li>
     <% end %>
 
-    <% if events.length > 0 %>
-      <li><%= link_to "Other jumps: #{events.length - myjumps.length}", jumps_of_the_day_user_jumps_path(@user, date: date, owner: "others") %></li>
-    <% else %>
-      <li>Other jumps: <%= events.length - myjumps.length %></li>
+    <% if other_jumps.length > 0 %>
+      <li><%= link_to "Other jumps: #{other_jumps.length}", jumps_of_the_day_user_jumps_path(@user, date: date, owner: "others") %></li>
     <% end %>
   </ul>
   
