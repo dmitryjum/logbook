@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry-rails'
 
+gem "simple_calendar"
+
 # gem 'better_errors'
 
 ruby '2.1.0'

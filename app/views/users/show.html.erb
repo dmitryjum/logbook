@@ -9,5 +9,13 @@
   </ul>
 </div>
 <div id="calendar">
+<%= month_calendar events: @jumps do |date, events| %>
+  <%= date.day %>
+  <ul>
+    <% events.each do |jump| %>
+    <li><%= link_to "#{jump.jump_number}", jump_path(jump) %></li>
+    <% end %>
+  </ul>
   
+<% end %>
 </div>
