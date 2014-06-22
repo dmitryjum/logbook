@@ -9,4 +9,11 @@ class User < ActiveRecord::Base
   validates :dob, presence: true
 
   has_secure_password
+
+  extend SimpleCalendar
+  has_calendar attribute: :start_time
+
+  def start_time
+    date
+  end
 end
