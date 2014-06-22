@@ -37,7 +37,6 @@
   <% end %>
 </div>
 
-
 <div class="jump_pictures">
   <% if current_user.id == @jump.user_id %>
     <div class="new_pic_form">
@@ -48,7 +47,10 @@
     <thead><th colspan="4">My jump Pictures</th></thead>
     <tr>
       <% @pictures.each do |pic| %>
-        <td><p><%= pic.name %></p><p><%= link_to image_tag(pic.picture_url), picture_path(pic, jump_id: @jump.id) %></p></td>
+        <td><p><%= pic.name %></p>
+          <p><%= link_to image_tag(pic.picture_url), picture_path(pic, jump_id: @jump.id) %></p>
+          <p>There are <%= pic.picture_comments.all.length %> comments for this picture</p>
+        </td>
       <% end %>
     </tr>
   </table>
