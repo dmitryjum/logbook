@@ -1,6 +1,6 @@
 class JumpsController < ApplicationController
   self.before_action(:load_jump, {only: [:show, :edit, :update, :unshare, :destroy] })
-  self.before_action(:load_user, {only: [:index, :new, :create, :jumps_of_the_day]})
+  self.before_action(:load_user, {only: [:index, :new, :create, :jump_day]})
   self.before_action(:load_jump_user, {only: [:show, :edit, :update, :unshare, :destroy]})
   before_action :authorize_index, only: [:index, :new, :jumps_of_the_day]
   before_action :authenticate, :authorize, only: [ :show, :edit, :update, :destroy]
@@ -52,7 +52,7 @@ class JumpsController < ApplicationController
     redirect_to user_jumps_path(@user)
   end
 
-  def jumps_of_the_day
+  def jump_day
     @my_jumps = Jump.all.mine(params[:date], @user.id)
     @other_jumps = Jump.all.others(params[:date], @user.id)
   end
