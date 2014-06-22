@@ -29,7 +29,9 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry-rails'
 
-gem "simple_calendar"
+gem 'simple_calendar'
+
+gem 'stricter-string-to-date'
 
 # gem 'better_errors'
 
