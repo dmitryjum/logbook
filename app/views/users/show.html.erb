@@ -17,7 +17,7 @@
   <%= calendar @date do |date| %>
       <%= date.day %>
     <% my_jumps = @jumps.where(date: date).select {|jump| jump.user_id == current_user.id} %>
-    <% other_jumps = @jumps.where(date: date).select {|jump| jump.user_id != current_user.id} %>
+    <% other_jumps = @jumps.where(date: date).select {|jump| jump.shared_users.include?(current_user)} %>
   <ul>
     <% if my_jumps.length > 0 %>
       <li><%= link_to "My jumps: #{my_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "mine") %></li>

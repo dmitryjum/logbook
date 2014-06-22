@@ -5,6 +5,9 @@ class PicturesController < ApplicationController
   before_action :authenticate, :authorize, only: [:create, :show, :edit, :update, :destroy]
 
   def show
+    @comment = PictureComment.new
+    # @user = User.find_by(id: @jump.user_id)
+    @comments = @picture.picture_comments.all
   end
 
   def create
