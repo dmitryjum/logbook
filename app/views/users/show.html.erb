@@ -10,7 +10,8 @@
 </div>
 <div id="calendar">
   <%= month_calendar events: @jumps do |date, events| %>
-    
+  <% binding.pry %>
+    <%= date.day %>
     <% my_jumps = events.select {|jump| jump.user_id == current_user.id} %>
     <% other_jumps = events.select {|jump| jump.user_id != current_user.id} %>
     <ul>
