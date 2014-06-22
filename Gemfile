@@ -31,6 +31,7 @@ gem 'pry-rails'
 
 # gem 'simple_calendar'
 
+
 # gem 'better_errors'
 
 ruby '2.1.0'
