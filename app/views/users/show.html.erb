@@ -8,20 +8,3 @@
     <li><%= link_to "Delete my account", user_path(@user), method: :delete, data: { confirm: "Are you sure?"} %></li>
   </ul>
 </div>
-<div id="calendar">
-  <%= month_calendar events: @jumps do |date, events| %>
-  <% binding.pry %>
-    <%= date.day %>
-    <% my_jumps = events.select {|jump| jump.user_id == current_user.id} %>
-    <% other_jumps = events.select {|jump| jump.user_id != current_user.id} %>
-    <ul>
-      <% if my_jumps.length > 0 %>
-        <li><%= link_to "My jumps: #{my_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "mine") %></li>
-      <% end %>
-
-      <% if other_jumps.length > 0 %>
-        <li><%= link_to "Other jumps: #{other_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "others") %></li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>

@@ -7,6 +7,7 @@ class JumpsController < ApplicationController
 
   def index
     @jumps = @user.jumps.all
+    @alljumps = Jump.all
   end
 
   def new
