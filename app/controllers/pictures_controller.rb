@@ -35,7 +35,7 @@ class PicturesController < ApplicationController
   end
 
   def picture_params
-    params.require(:picture).permit(:name, :picture_url, :jump_id)
+    params.require(:picture).permit(:name, :picture_url, :jump_id, :image_file)
   end
 
   def authenticate

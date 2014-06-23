@@ -1,6 +1,11 @@
 <%= link_to "Go back the the jump description", jump_path(@jump) %>
 <div class="picture_show">
-  <%= image_tag @picture.picture_url %>
+  <% unless @picture.picture_url.empty? %>
+    <%= image_tag @picture.picture_url %>
+  <% else %>
+    <%= image_tag @picture.image_file.url %>
+  <% end %>
+  
   <% if current_user.id == @jump.user_id %>
     <%= button_to "Delete this picture",
      picture_path(@picture, jump_id: params[:jump_id]),
