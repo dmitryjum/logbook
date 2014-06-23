@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :picture_comments, { :dependent => :destroy }
   has_attached_file :avatar,
                     :styles => { :medium => "300x189>", :thumb => "100x63>" },
-                    :default_url => "/assets/freefallman.jpg",
+                    :default_url => "freefallman.jpg",
                     :storage => :s3,
                     :bucket => 'skydivepagesavatar',
                     :s3_credentials => {
