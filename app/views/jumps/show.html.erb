@@ -4,6 +4,7 @@
 </div>
 <div class="jump_info">
   <ul class="jump-info-cell">
+    <li>Performer: <%= @jump_user.first_name %> <%= @jump_user.last_name %> <%= image_tag @jump_user.avatar.url(:thumb) %></li>
     <li>Date: <%= @jump.date.to_s %></li>
     <li>Location: <%= @jump.location %></li>
     <li>Freefall time: <%= @jump.freefall_time %></li>
@@ -53,7 +54,7 @@
           <% else %>
             <p><%= link_to image_tag(pic.image_file.url), picture_path(pic, jump_id: @jump.id) %></p>
           <% end %>
-          <p>There are <%= pic.picture_comments.all.length %> comments for this picture</p>
+          <p>Comments: <%= pic.picture_comments.all.length %> </p>
         </td>
       <% end %>
     </tr>
