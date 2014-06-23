@@ -16,9 +16,13 @@ Authentication and Authorization using [bcrypt-ruby]
 
 * As a user I can update my information details.
 * As a user I can add a jump in the logbook,browse them, delete or edit details
-* As a user I can add pictures to each particular jump and delete them
+* As a user I can add pictures via links or upload from his computer to each particular jump and delete them.
 * As a user I can add and delete videos to each particular jump
 * As a user I can log in, log out with password and email and my profile is secure.
+* As a user I can share my jumps with other users and restrict access for them.
+* As a user I can comment on my pictures and pictures of jumps that are shared with me
+* As a user I can upload avatar
+* As a user I can browse the jumps through event calendar
 
 Links:
 *Heroku: http://skydivepages.herokuapp.com/
