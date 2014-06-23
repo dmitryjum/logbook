@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :jumps
   has_many :jump_users
   has_many :shared_jumps, through: :jump_users, source: :jump
-  has_many :picture_comments
+  has_many :picture_comments, { :dependent => :destroy }
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, presence: true
