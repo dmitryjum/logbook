@@ -1,5 +1,8 @@
 Logbook::Application.routes.draw do
   resources :users, except: [:index] do
+    member do
+      get :remove_avatar
+    end
     resources :jumps, shallow: true do
       member do
         get :unshare

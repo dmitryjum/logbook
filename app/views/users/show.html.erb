@@ -1,5 +1,9 @@
 <h2>Welcome <%= @user.first_name %>!</h2>
 <br/>
+<div class="avatar">
+  <%= link_to "X", remove_avatar_user_path(@user) %>
+  <%= image_tag(@user.avatar.url) %>
+</div>
 <div class="user-controls">
   <ul>
     <li><%= link_to "Add new jump", new_user_jump_path(@user) %></li>

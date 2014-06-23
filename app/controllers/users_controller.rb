@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :load_user, only: [:show, :edit, :update, :destroy]
+before_action :load_user, only: [:show, :edit, :update, :destroy, :remove_avatar]
 before_action :authenticate, :authorize, only: [:show, :edit, :update]
   def new
     @user = User.new
@@ -36,6 +36,12 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
     end
   end
 
+  def remove_avatar
+    @user.avatar = nil
+    @user.save
+    redirect_to user_path(@user)
+  end
+
   def destroy
     @user.destroy
     session.destroy
@@ -51,7 +57,7 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-      :first_name, :last_name, :dob, :license_number)
+      :first_name, :last_name, :dob, :license_number, :avatar)
   end
 
   def authenticate

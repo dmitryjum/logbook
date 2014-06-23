@@ -27,5 +27,8 @@
   <%= f.text_field :license_number %>
   <br/>
 
+  <%= f.label "Avatar" %>
+  <%= f.file_field :avatar %>
+
   <%= f.submit @user.id.nil? ? "Join!" : "Save Changes" %>
 <% end %>
