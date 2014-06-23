@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry-rails'
 
-# gem 'simple_calendar'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 
 # gem 'better_errors'
