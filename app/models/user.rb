@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :signatures
   has_many :jumps
   has_many :jump_users
   has_many :shared_jumps, through: :jump_users, source: :jump

@@ -1,14 +1,16 @@
 var canvas;
 var context;
 var radius;
+var saveButton;
 
-function canvasFunc() {  
+function canvasFunc(userid) {  
   canvas = document.getElementById('canvas');
   context = canvas.getContext('2d');
+  saveButton = $('#save-signature');
   
 
-  canvas.width = 300;
-  canvas.height = 100;
+  canvas.width = 250;
+  canvas.height = 80;
   radius = 3;
   
   // switch to be able to drag and keep on putting dots down
@@ -53,15 +55,58 @@ function canvasFunc() {
   canvas.addEventListener('mousemove', putPoint);
   // stops putting dots
   canvas.addEventListener('mouseup', disengage);
-}
 
-function saveSign() {
-  // var button = $('#save-signature');
-  // var field = $('#sign')
-  button.click(function(e) {
-    e.preventDefault();
-    var canvasData = canvas.toDataURL();
-    console.log(canvasData);
-    field.val(canvasData);
-  })
-}
+};
+
+function saveUpdate(userid) {
+  var signatureId;
+  var signatures;
+
+  function saveSignature(code) {
+    $.ajax({
+      type: "POST",
+      url: "/users/" + userid + "/signatures",
+      data: {signature: {"code_url": code}}
+    })
+  };
+
+  function updateSignature(signatureId, code) {
+    $.ajax({
+      type: "PUT",
+      url: "/users/" + userid + "/signatures/" + signatureId,
+      data: {signature: {"code_url": code}}
+    })
+  };
+
+  function getAllSignatures() {
+    $.getJSON("/users/" + userid + "/signatures", function(response) {
+      if (response.length > 0){
+        signatureId = response[0].id;
+      };
+      signatures = response.length
+      console.log(signatureId);
+      console.log(response);
+      switchBoard(signatures);
+    })
+  };
+
+  function switchBoard(signatures) {
+    if (signatures === 0) {
+        saveButton.click(function(e) {
+          e.preventDefault();
+          var code = canvas.toDataURL();
+          saveSignature(code);
+        });
+        console.log(signatures)
+    } else if (signatures >= 1) {
+        saveButton[0].innerText = "Update your signature";
+        saveButton.click(function(e) {
+          e.preventDefault();
+          var code = canvas.toDataURL();
+          updateSignature(signatureId, code)
+        })
+    }
+  };
+
+getAllSignatures();
+};

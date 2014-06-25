@@ -1,5 +1,6 @@
 class Jump < ActiveRecord::Base
   belongs_to :user
+  belongs_to :signature
   has_many :pictures, { :dependent => :destroy }
   has_many :videos, { :dependent => :destroy }
   has_many :jump_users

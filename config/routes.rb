@@ -3,24 +3,27 @@ Logbook::Application.routes.draw do
     member do
       get :remove_avatar
     end
+    resources :signatures, except: [:show, :edit, :new]
     resources :jumps, shallow: true do
       member do
         get :unshare
+        get :sign
       end
       collection do
         get :jump_day
       end
-    resources :pictures, except: [:index, :new, :edit, :update] do
-      resources :picture_comments, only: [:create, :update, :destroy]
+      resources :pictures, except: [:index, :new, :edit, :update] do
+        resources :picture_comments, only: [:create, :update, :destroy]
+      end
+      resources :videos, except: [:show, :edit, :update]
     end
-    resources :videos, except: [:show, :edit, :update]
   end
+
+  post "/session", to: "session#create"
+  delete "/session", to: "session#destroy"
+
+  root "welcome#index"
 end
-
-post "/session", to: "session#create"
-delete "/session", to: "session#destroy"
-
-root "welcome#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -76,4 +79,3 @@ root "welcome#index"
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

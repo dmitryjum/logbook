@@ -10,7 +10,15 @@
     </ul>
   </div>
 <% end %>
-
-<%= render "form" %>
-
 <p><%= link_to "Return to user home.", user_path(@user) %></p>
+<div id="user-form">
+  <%= render "form" %>
+</div>
+<div id="signature-form">
+  <canvas id="canvas"></canvas>
+  <a href="#" id="save-signature">Save signature</a>
+</div>
+<script type="text/javascript">
+  canvasFunc("<%= @user.id %>");
+  saveUpdate("<%= @user.id %>");
+</script>

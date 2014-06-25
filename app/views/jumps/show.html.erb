@@ -4,7 +4,7 @@
 </div>
 <div class="jump_info">
   <ul class="jump-info-cell">
-    <li>Performer: <%= @jump_user.first_name %> <%= @jump_user.last_name %> <%= image_tag @jump_user.avatar.url(:thumb) %></li>
+    <li>Performer: <%= @user.first_name %> <%= @user.last_name %> <%= image_tag @user.avatar.url(:thumb) %></li>
     <li>Date: <%= @jump.date.to_s %></li>
     <li>Location: <%= @jump.location %></li>
     <li>Freefall time: <%= @jump.freefall_time %></li>
@@ -14,6 +14,14 @@
     <li>Exit altitude: <%= @jump.exit_altitude %></li>
     <li>Total freefall time to date: <%= @jump.total_freefall_time %></li>
   </ul>
+  <% if @signature == nil && @jump.shared_users.include?(current_user) %>
+    <%= link_to "Sign this jump, please!", sign_jump_path(@jump) %>
+  <% elsif @signature != nil && (@user == current_user || @jump.shared_users.include?(current_user)) %>
+    <p>The jump was signed by: <%= @signature.user.first_name %> <%= @signature.user.last_name %></p> <div id="signature"><%= image_tag @signature.code_url %></div>
+  <% elsif @signature == nil && @user == current_user %>
+    <p>This jump hasn't been signed yet. Share it with someone and they may sign it</p>
+  <% end %>
+
   <% if current_user.id == @jump.user_id %>
     <ul class="jump-info-cell">
       <% @jump.shared_users.each do |user| %>
