@@ -1,0 +1,67 @@
+var canvas;
+var context;
+var radius;
+
+function canvasFunc() {  
+  canvas = document.getElementById('canvas');
+  context = canvas.getContext('2d');
+  
+
+  canvas.width = 300;
+  canvas.height = 100;
+  radius = 3;
+  
+  // switch to be able to drag and keep on putting dots down
+  var dragging = false;
+  //setting up thikness of connecting line to the width of the dot
+  context.lineWidth = radius * 2;
+  context.fillStyle = "black";
+  context.strokeStyle = "black";
+
+  var putPoint = function(e){
+    if (dragging){
+      //connects 2 dots in memory
+    context.lineTo(e.offsetX, e.offsetY);
+    // striking the line between 2 dots on canvas
+    context.stroke();
+    context.beginPath();
+    //creating the dot based on parameters below(in memory)
+    context.arc(e.offsetX, e.offsetY, radius, 0, Math.PI*2);
+    //placing the dot from memory to canvas
+    context.fill();
+    //starts that path over
+    context.beginPath();
+    //begins dot connecting process
+    context.moveTo(e.offsetX, e.offsetY);
+    }
+  };
+
+  var engage = function(e) {
+    dragging = true;
+    putPoint(e);
+  };
+
+  var disengage = function() {
+    dragging = false;
+    //clearing the current path in order not to lineTo()
+    // between dots every time we "mouseup" and "mousedown"
+    context.beginPath();
+  };
+  // puts dot down
+  canvas.addEventListener('mousedown', engage);
+  // puts dots while dragging
+  canvas.addEventListener('mousemove', putPoint);
+  // stops putting dots
+  canvas.addEventListener('mouseup', disengage);
+}
+
+function saveSign() {
+  // var button = $('#save-signature');
+  // var field = $('#sign')
+  button.click(function(e) {
+    e.preventDefault();
+    var canvasData = canvas.toDataURL();
+    console.log(canvasData);
+    field.val(canvasData);
+  })
+}
