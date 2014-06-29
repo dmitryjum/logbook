@@ -70,7 +70,7 @@
                 <% if signature == nil && jump.shared_users.include?(current_user) %>
                   <%= link_to "Sign this jump, please!", sign_jump_path(jump) %>
                 <% elsif signature != nil && (@user == current_user || jump.shared_users.include?(current_user)) %>
-                The jump was signed by: <%= signature.user.first_name %> <%= signature.user.last_name %> <div id="signature"><%= image_tag signature.code_url %></div>
+                The jump was signed by: <%= signature.user.first_name %> <%= signature.user.last_name %> <div class="signature"><%= image_tag signature.code_url %></div>
                 <% elsif signature == nil && @user == current_user %>
                   This jump hasn't been signed yet. Share it with someone and they may sign it
                 <% end %>
@@ -80,10 +80,10 @@
               <td colspan="2"><% link_to "Edit this jump", edit_jump_path(jump) %></td>
               <% jump_videos = Video.where(jump_id: jump.id) %>
               <% if !jump_videos.empty? %>
-              <td colspan="2"><%= link_to "Videos for this jump", jump_videos_path(jump) %></td>
+              <td colspan="2"><%= link_to "Videos for this jump", jump_videos_path(jump), class: "video" %></td>
               <% else %>
                 <% if current_user.id == jump.user_id %>
-                <td colspan="2"><%= link_to "Here you can add a video from this jump", jump_videos_path(jump) %></td>
+                <td colspan="2"><%= link_to "Here you can add a video from this jump", jump_videos_path(jump), class: "video" %></td>
                 <% end %>
               <% end %>
               <td colspan="2"></td>
@@ -95,3 +95,4 @@
     </ul>
   </div>
 </section>
+<%= javascript_tag("$(function(){ addVideoContent(); });") %>
