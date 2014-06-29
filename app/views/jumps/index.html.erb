@@ -18,7 +18,7 @@
       <th>Jump Date</th>
       <th>Dropzone</th>
     </tr>
-      <% @jumps.each do |j| %>
+      <% @user.jumps.each do |j| %>
     <tr>
       <td><%= link_to "#{j.jump_number}", jump_path(j) %></td>
       <td><%= j.date %></td>

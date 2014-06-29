@@ -36,7 +36,7 @@
   <% if current_user.id == @jump.user_id %>
     <p><%= link_to "Edit this jump", edit_jump_path(@jump) %></p>
   <% end %>
-  <% jump_videos = @videos.where(jump_id: @jump.id) %>
+  <% jump_videos = Video.where(jump_id: @jump.id) %>
   <% if !jump_videos.empty? %>
     <p><%= link_to "Videos for this jump", jump_videos_path(@jump) %></p>
   <% else %>
@@ -55,7 +55,7 @@
   <table class="pic-table">
     <thead><th colspan="4">My jump Pictures</th></thead>
     <tr>
-      <% @pictures.each do |pic| %>
+      <% @jump.pictures.each do |pic| %>
         <td><p><%= pic.name %></p>
           <% unless pic.picture_url.empty? %>
             <p><%= link_to image_tag(pic.picture_url), picture_path(pic, jump_id: @jump.id) %></p>

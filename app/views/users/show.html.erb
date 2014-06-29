@@ -23,14 +23,14 @@
   </h2>
   <%= calendar @date do |date| %>
       <%= date.day %>
-    <% my_jumps = @jumps.where(date: date).select {|jump| jump.user_id == current_user.id} %>
-    <% other_jumps = @jumps.where(date: date).select {|jump| jump.shared_users.include?(current_user)} %>
+    <% my_jumps = Jump.where(date: date).select {|jump| jump.user_id == current_user.id} %>
+    <% other_jumps = Jump.where(date: date).select {|jump| jump.shared_users.include?(current_user)} %>
   <ul>
     <% if my_jumps.length > 0 %>
-      <li id="mine"><%= link_to "My jumps: #{my_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "mine") %></li>
+      <li class="mine"><%= link_to "My jumps: #{my_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "mine") %></li>
     <% end %>
     <% if other_jumps.length > 0 %>
-      <li id="other"><%= link_to "Other jumps: #{other_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "others") %></li>
+      <li class="other"><%= link_to "Other jumps: #{other_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "others") %></li>
     <% end %>
   </ul>
   <% end %>
