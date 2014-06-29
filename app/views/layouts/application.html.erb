@@ -1,31 +1,49 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Logbook</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title><%= content_for?(:title) ? yield(:title) : "Skydive Pages" %></title>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
   <header>
-    <div class="nav-bar">
-    <ul>
-    <li><%= link_to "Home", root_path %></li>
-
-    <% if logged_in? %>
-    <li><%= link_to "My profile", user_path(current_user) %></li>
-      <li class="right"><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></li>
-    <% else %>
-      
-      <li class="right"><%= render "session/form" %></li>
-      <li class="right"><%= link_to "Sign up", new_user_path %></li>
-    <% end %>
-  </ul>
-</div>
+    <div class="fixed">
+      <nav class="top-bar" data-topbar>
+        <section class="top-bar-section">
+          <ul>
+            <li><%= link_to "Home", root_path %></li>
+            <% if logged_in? %>
+              <li class="has-dropdown"><%= link_to "My Profile", user_path(current_user) %>
+                <ul class="dropdown">
+                  <li><%= link_to "Add new jump", new_user_jump_path(current_user) %></li>
+                  <li><%= link_to "Edit My Info", edit_user_path(current_user) %></li>
+                  <li><%= link_to "Delete my account", user_path(current_user), method: :delete, data: { confirm: "Are you sure?"} %></li>
+                </ul>
+              </li>
+              <li><%= link_to "My Logbook", user_jumps_path(current_user) %></li>
+          </ul>
+          <ul class="right">
+              <li><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></li>
+            <% else %>
+              <li><%= link_to "Sign up", new_user_path %></li>
+            <% end %>
+          </ul>
+        </section>
+      </nav>
+    </div>
   </header>
 
-<%= yield %>
-
-</body>
+    <%= yield %>
+    <%= javascript_tag("$(function(){ $(document).foundation(); });") %>
+    <% if !logged_in? %>
+      <%= javascript_tag("loginPlaceholders();") %>
+    <% end %>
+  </body>
 </html>

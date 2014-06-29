@@ -33,6 +33,8 @@ gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
 gem 'aws-sdk'
 
+gem 'foundation-rails'
+
 # gem 'better_errors'
 
 ruby '2.1.0'

@@ -1,14 +1,5 @@
 <h2>Welcome <%= @user.first_name %>!</h2>
 <br/>
-<div class="user-controls">
-  <ul>
-    <li><%= link_to "Add new jump", new_user_jump_path(@user) %></li>
-    <li><%= link_to "View my logbook", user_jumps_path(@user) %></li>
-    <li><%= link_to "Edit My Info", edit_user_path(@user) %></li>
-    <li><%= form_tag user_path(@user), method: "delete",data: { confirm: "Are you sure?"} do %>
-      <%= submit_tag("Delete My Account") %>
-      <% end %></li>
-  </ul>
 </div>
 <div class="my_jumps">
   <table>

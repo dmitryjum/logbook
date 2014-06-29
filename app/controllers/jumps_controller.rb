@@ -1,7 +1,7 @@
 class JumpsController < ApplicationController
   self.before_action(:load_jump, {only: [:show, :edit, :update, :unshare, :sign, :destroy] })
   self.before_action(:load_user, {only: [:index, :new, :create, :jump_day]})
-  self.before_action(:load_jump_user, {only: [:show, :edit, :update, :unshare, :destroy]})
+  self.before_action(:load_jump_user, {only: [:show, :edit, :update, :unshare, :destroy, :sign]})
   before_action :authorize_index, only: [:index, :new, :jumps_of_the_day]
   before_action :authenticate, :authorize, only: [ :show, :edit, :update, :destroy, :sign]
 
@@ -54,7 +54,11 @@ class JumpsController < ApplicationController
 
   def sign
     @signature = current_user.signatures.first
-    @signature.jumps << @jump
+    if current_user != @jump_user
+      @signature.jumps << @jump
+    else
+      flash[:error] = "You can't sign your own jump!"
+    end
     redirect_to jump_path
   end
 

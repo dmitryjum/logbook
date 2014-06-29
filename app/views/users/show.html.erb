@@ -1,38 +1,97 @@
-<h2>Welcome <%= @user.first_name %>!</h2>
-<br/>
-<div class="avatar">
-  <%= link_to "X", remove_avatar_user_path(@user) %>
-  <%= image_tag(@user.avatar.url) %>
-</div>
-<div class="user-controls">
-  <ul>
-    <li><%= link_to "Add new jump", new_user_jump_path(@user) %></li>
-    <li><%= link_to "View my logbook", user_jumps_path(@user) %></li>
-    <li><%= link_to "Edit My Info", edit_user_path(@user) %></li>
-    <li><%= link_to "Delete my account", user_path(@user), method: :delete, data: { confirm: "Are you sure?"} %></li>
+<section class="row">
+  <div class="small-12 large-6 columns">
+    <div class="avatar">
+      <%= link_to "X", remove_avatar_user_path(@user) %>
+      <%= image_tag(@user.avatar.url) %>
+    </div>
     <% if @signature != nil %>
-    <li>My signature: <%= image_tag @signature.code_url %></li>
+    My signature: <%= image_tag @signature.code_url %>
     <% end %>
-  </ul>
-</div>
-<div id="calendar">
-  <h2 id="month">
-    <%= link_to "<<", user_path(date: @date - 1.month) %>
-    <%= "#{@date.strftime("%B")} #{@date.year}" %>
-    <%= link_to ">>", user_path(date: @date + 1.month) %>
-  </h2>
-  <%= calendar @date do |date| %>
-      <%= date.day %>
-    <% my_jumps = Jump.where(date: date).select {|jump| jump.user_id == current_user.id} %>
-    <% other_jumps = Jump.where(date: date).select {|jump| jump.shared_users.include?(current_user)} %>
-  <ul>
-    <% if my_jumps.length > 0 %>
-      <li class="mine"><%= link_to "My jumps: #{my_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "mine") %></li>
+  </div>
+  <div class="small-12 large-6 columns">
+    <div id="my-info">
+      <ul>
+        <li>My name: <strong><%= @user.first_name %> <%= @user.last_name %></strong></li>
+        <li>My email: <strong><%= @user.email %></strong></li>
+        <li>My date of birth: <strong><%= @user.dob %></strong></li>
+        <li>My license number: <strong><%= @user.license_number %></strong></li>
+        <li>Total number of jumps in this logbook: <strong><%= @user.jumps.length %></strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="row" id="user-jumps">
+  <div class="small-12 columns">
+    <ul>
+    <% @user.jumps.each do |jump| %>
+      <li>
+        <table>
+          <thead>
+            <tr>
+              <th width="30">Jump Number</th>
+              <th width="100">Date</th>
+              <th width="100">Location</th>
+              <th width="100">Freefall Delay</th>
+              <th width="150">Equipment Used</th>
+              <th width="150">Aircraft</th>
+              <th width="100">Exit Altitude</th>
+              <th width="100">Total Freefall Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= jump.jump_number %></td>
+              <td><%= jump.date %></td>
+              <td><%= jump.location %></td>
+              <td><%= jump.freefall_time %> seconds</td>
+              <td><%= jump.equipment %></td>
+              <td><%= jump.aircraft %></td>
+              <td><%= jump.exit_altitude %> feet</td>
+              <td><%= jump.total_freefall_time %> seconds</td>
+            </tr>
+            <tr>
+              <th colspan="2">Jump Description:</th>
+              <td colspan="6"><%= jump.notes %></td>
+            </tr>
+            <tr>
+              <th colspan="2">Useres the jumped shared with:</th>
+              <td colspan="6">
+                <% if current_user.id == jump.user_id %>
+                  <% jump.shared_users.each do |user| %>
+                    <%= user.first_name %><%= link_to "X", unshare_jump_path(jump, jump_user_id: user.id) %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="2">Signature:</th>
+              <td colspan="4">
+                <% signature = Signature.find_by(id: jump.signature_id) %>
+                <% if signature == nil && jump.shared_users.include?(current_user) %>
+                  <%= link_to "Sign this jump, please!", sign_jump_path(jump) %>
+                <% elsif signature != nil && (@user == current_user || jump.shared_users.include?(current_user)) %>
+                The jump was signed by: <%= signature.user.first_name %> <%= signature.user.last_name %> <div id="signature"><%= image_tag signature.code_url %></div>
+                <% elsif signature == nil && @user == current_user %>
+                  This jump hasn't been signed yet. Share it with someone and they may sign it
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2"><% link_to "Edit this jump", edit_jump_path(jump) %></td>
+              <% jump_videos = Video.where(jump_id: jump.id) %>
+              <% if !jump_videos.empty? %>
+              <td colspan="2"><%= link_to "Videos for this jump", jump_videos_path(jump) %></td>
+              <% else %>
+                <% if current_user.id == jump.user_id %>
+                <td colspan="2"><%= link_to "Here you can add a video from this jump", jump_videos_path(jump) %></td>
+                <% end %>
+              <% end %>
+              <td colspan="2"></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
     <% end %>
-    <% if other_jumps.length > 0 %>
-      <li class="other"><%= link_to "Other jumps: #{other_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "others") %></li>
-    <% end %>
-  </ul>
-  <% end %>
-</div>
-
+    </ul>
+  </div>
+</section>

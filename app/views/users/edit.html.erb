@@ -1,23 +1,26 @@
-<h2>Update user <%= @user.email %></h2>
-
-<% unless @update_worked %>
-  <div id="errors">
-    <h3>Errors!</h3>
-    <ul>
-      <% @user.errors.messages.each do |field,error| %>
-        <li><em><%= "#{field.capitalize} #{error.first}!" %></em></li>
-      <% end %>
-    </ul>
+<section class="row new-edit-user">
+  <div class="small-12 large-6 columns right">
+    <h2>Update user <%= @user.email %></h2>
+    <% unless @update_worked %>
+    <div id="errors">
+      <h3>Errors!</h3>
+      <ul>
+        <% @user.errors.messages.each do |field,error| %>
+          <li><em><%= "#{field.capitalize} #{error.first}!" %></em></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p><%= link_to "Return to user home.", user_path(@user) %></p>
+    <%= render "form" %>
   </div>
-<% end %>
-<p><%= link_to "Return to user home.", user_path(@user) %></p>
-<div id="user-form">
-  <%= render "form" %>
-</div>
-<div id="signature-form">
-  <canvas id="canvas"></canvas>
-  <a href="#" id="save-signature">Save signature</a>
-</div>
+  <div class="small-12 large-6 columns">
+    <canvas id="canvas"></canvas>
+    <a href="#" id="save-signature">Save signature</a>
+  </div>
+</section>
+
+
 <script type="text/javascript">
   canvasFunc("<%= @user.id %>");
   saveUpdate("<%= @user.id %>");

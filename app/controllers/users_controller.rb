@@ -18,8 +18,8 @@ before_action :authenticate, :authorize, only: [:show, :edit, :update]
   end
 
   def show
+    # @jump_sign = Signature.find_by(id: @jump.signature_id)
     @signature = @user.signatures.first
-    # @jumps = Jump.all
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
   end
 
