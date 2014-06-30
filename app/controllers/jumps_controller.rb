@@ -7,12 +7,6 @@ class JumpsController < ApplicationController
 
   def index
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    # @jumps = @user.jumps
-    # @alljumps = Jump.all
-    # respond_to do |format|
-    #   format.html {render :index}
-    #   format.json {render json: @user.jumps}
-    # end
   end
 
   def new
@@ -26,9 +20,6 @@ class JumpsController < ApplicationController
 
   def show
     @picture = Picture.new
-    # @videos = Video.all
-    # @pictures = @jump.pictures.all
-    # @jump.shared_users
     @signature = Signature.find_by(id: @jump.signature_id)
   end
 
@@ -72,18 +63,13 @@ class JumpsController < ApplicationController
   def jump_day
     @my_jumps = Jump.all.mine(params[:date], @user.id)
     @other_jumps = Jump.all.others(params[:date], @user.id)
-    # render :jump_day, layout: false
-    # respond_to do |format|
-    #   format.html
-    #   format.js {render 'jump_day', :content_type=>'text/html', :layout=>false}
-    # end
+    render :jump_day, layout: false
   end
 
 
   private
 
   def load_user
-    # return @user = User.includes(:jumps).select {|u| u.id == params[:user_id].to_i}.first
     return @user = User.find(params[:user_id])
   end
 

@@ -1,14 +1,18 @@
-<h2>These are the jumps for this day: </h2>
+<p><strong>These are the jumps for this day: </strong></p>
 <ul>
   <% if params[:owner] == "mine" %>
-    <% @my_jumps.each do |j| %>
-      <li><%= link_to "Jump#  #{j.jump_number}. Location: #{j.location}", jump_path(j) %></li>
+    <% @my_jumps.each do |jump| %>
+      <%= render "jumps/list", jump: jump %>
     <% end %>
   <% elsif params[:owner] == "others" %>
-    <% @other_jumps.each do |j| %>
-      <li><%= link_to "Jump#  #{j.jump_number}. Location: #{j.location}", jump_path(j) %></li>
+    <% @other_jumps.each do |jump| %>
+      <%= render "jumps/list", jump: jump %>
     <% end %>
   <% end %>
 </ul>
-<br />
-<strong><%= link_to "Get back to the calendar", user_path(@user) %></strong>
+<script type="text/javascript">
+  $(function(){
+    addVideoContent();
+    addPictureContent();
+  });
+</script>

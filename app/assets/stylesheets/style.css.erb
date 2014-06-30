@@ -8,8 +8,8 @@ body {
   background-size: cover;
  }
 
- .row {
-  /*max-width: 80rem;*/
+ .extra-wide {
+  max-width: 80rem;
  }
 
  #first-row {
@@ -161,12 +161,20 @@ body {
   border-radius: 10px;
  }
 
- /*calendar styles*/
+/*************************/
+/*****calendar styles*****/
+/*************************/
 
 #calendar table {
-border-collapse: collapse;
-width: 30%;
-height: 30%;
+  border-collapse: collapse;
+  width: 30%;
+  height: 30%;
+  background: rgba(234,228,204,0.2);
+
+}
+
+table tr.even, table tr.alt, table tr:nth-of-type(even) {
+  background: rgba(234,228,204,0.2);
 }
 
 #calendar td,
@@ -185,7 +193,6 @@ height: 30%;
 }
 
 #calendar td {
-  background: rgba(234,228,204,0.25);
   color: white;
   height: 70px;
   vertical-align: top;
@@ -271,6 +278,12 @@ canvas {
 
 .new-jump-form {
   margin: 2em;
+}
+
+/***** Extra styling *****/
+
+#jumps-index {
+  margin: 1em;
 }
 
  

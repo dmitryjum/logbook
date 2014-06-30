@@ -1,1 +1,35 @@
-index.html.erb
+<section class="row extra-wide" id="jumps-index">
+  <div class="small-12 large-4 columns">
+    <div id="calendar">
+      <p id="month"><strong>
+        <%= link_to "<<", user_jumps_path(date: @date - 1.month) %>
+        <%= "#{@date.strftime("%B")} #{@date.year}" %>
+        <%= link_to ">>", user_jumps_path(date: @date + 1.month) %></strong>
+      </p>
+      <%= calendar @date do |date| %>
+          <%= date.day %>
+        <% my_jumps = Jump.where(date: date).select {|jump| jump.user_id == current_user.id} %>
+        <% other_jumps = Jump.where(date: date).select {|jump| jump.shared_users.include?(current_user)} %>
+      <ul>
+        <% if my_jumps.length > 0 %>
+          <li><%= link_to "My jumps: #{my_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "mine"), class: "mine" %></li>
+        <% end %>
+        <% if other_jumps.length > 0 %>
+          <li><%= link_to "Other jumps: #{other_jumps.length}", jump_day_user_jumps_path(@user, date: date, owner: "others"), class: "others" %></li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="small-12 large-8 columns jumpList">
+    
+  </div>
+</section>
+
+<script type="text/javascript">
+  $(function(){
+    addMyJumps();
+    addOtherJumps();
+  });
+</script>

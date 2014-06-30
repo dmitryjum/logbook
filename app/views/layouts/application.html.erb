@@ -27,7 +27,7 @@
                   <li><%= link_to "Delete my account", user_path(current_user), method: :delete, data: { confirm: "Are you sure?"} %></li>
                 </ul>
               </li>
-              <li><%= link_to "My Logbook", user_jumps_path(current_user) %></li>
+              <li><%= link_to "Calendar", user_jumps_path(current_user) %></li>
           </ul>
           <ul class="right">
               <li><%= link_to("Log Out #{current_user.first_name}!", "/session", method: "delete") %></li>
