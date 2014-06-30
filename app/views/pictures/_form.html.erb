@@ -1,4 +1,4 @@
-<h3>Add another picture for this jump</h3>
+<p><strong>Add another picture for this jump</strong></p>
 <%= form_for [@jump, @picture] do |v| %>
    <%= v.label :name %>
   <%= v.text_field :name %>
@@ -9,5 +9,5 @@
   <%= v.label :image_file, "Upload image" %>
   <%= v.file_field :image_file %>
 
-  <%= v.submit %>
+  <%= v.submit class: "tiny button" %>
 <% end %>

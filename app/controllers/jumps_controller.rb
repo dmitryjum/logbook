@@ -6,6 +6,7 @@ class JumpsController < ApplicationController
   before_action :authenticate, :authorize, only: [ :show, :edit, :update, :destroy, :sign]
 
   def index
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # @jumps = @user.jumps
     # @alljumps = Jump.all
     # respond_to do |format|

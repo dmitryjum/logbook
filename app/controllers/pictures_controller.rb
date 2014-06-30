@@ -1,8 +1,14 @@
 class PicturesController < ApplicationController
   self.before_action(:load_picture, { only: [:show, :edit, :update, :destroy] })
-  self.before_action(:load_jump, {only: [:show, :new, :create, :destroy]})
-  self.before_action(:load_user, {except: [:show, :destroy, :create]})
+  self.before_action(:load_jump, {only: [:index, :show, :new, :create, :destroy]})
+  self.before_action(:load_user, {except: [:index, :show, :destroy, :create]})
   before_action :authenticate, :authorize, only: [:create, :show, :edit, :update, :destroy]
+
+  def index
+    @picture = Picture.new
+    render :index, layout: false
+    # render json: @jump.pictures.all
+  end
 
   def show
     @comment = PictureComment.new

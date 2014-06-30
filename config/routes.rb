@@ -12,7 +12,7 @@ Logbook::Application.routes.draw do
       collection do
         get :jump_day
       end
-      resources :pictures, except: [:index, :new, :edit, :update] do
+      resources :pictures, except: [:new, :edit, :update] do
         resources :picture_comments, only: [:create, :update, :destroy]
       end
       resources :videos, except: [:show, :edit, :update]

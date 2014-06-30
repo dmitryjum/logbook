@@ -24,7 +24,7 @@
   <div class="small-12 columns">
     <ul>
     <% @user.jumps.each do |jump| %>
-      <li>
+      <li id="<%= jump.id %>">
         <table>
           <thead>
             <tr>
@@ -77,7 +77,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="2"><% link_to "Edit this jump", edit_jump_path(jump) %></td>
+              <th colspan="1">Other</th>
               <% jump_videos = Video.where(jump_id: jump.id) %>
               <% if !jump_videos.empty? %>
               <td colspan="2"><%= link_to "Videos for this jump", jump_videos_path(jump), class: "video" %></td>
@@ -86,7 +86,9 @@
                 <td colspan="2"><%= link_to "Here you can add a video from this jump", jump_videos_path(jump), class: "video" %></td>
                 <% end %>
               <% end %>
-              <td colspan="2"></td>
+              <td colspan="2"><%= link_to "Jump Pictures", jump_pictures_path(jump), class: "pic-link" %></td>
+              <td colspan="1"><%= link_to "Edit this jump", edit_jump_path(jump) %></td>
+              <td colspan="2"><%= link_to "Delete the jump", jump_path(jump, user_id: @user.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
             </tr>
           </tbody>
         </table>
@@ -95,4 +97,9 @@
     </ul>
   </div>
 </section>
-<%= javascript_tag("$(function(){ addVideoContent(); });") %>
+<script type="text/javascript">
+  $(function(){
+    addVideoContent();
+    addPictureContent();
+  });
+</script>

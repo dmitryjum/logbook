@@ -1,0 +1,22 @@
+<section class="row">
+  <div class="small-12 large-8 columns" id="album_table">
+    <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+        <% @jump.pictures.each do |img| %>
+            <li>
+              <p><%= img.name %></p>
+              <% unless img.picture_url.empty? %>
+                <%= link_to image_tag(img.picture_url), picture_path(img, jump_id: @jump.id), class: "th album-image-back" %>
+              <% else %>
+                <%= link_to image_tag(img.image_file.url), picture_path(img, jump_id: @jump.id), class: "th album-image-back" %>
+              <% end %>
+              <p>Comments: <%= img.picture_comments.all.length %> </p>
+            </li>
+        <% end %>
+    </ul>
+  </div>
+  <% if current_user.id == @jump.user_id %>
+    <div class="small-8 large-4 columns">
+      <%= render "pictures/form" %>
+    </div>
+  <% end %>
+</section>

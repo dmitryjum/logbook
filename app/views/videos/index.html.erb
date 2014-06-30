@@ -1,12 +1,15 @@
-<% jump_videos = @jump.videos.where(jump_id: @jump.id) %>
-    <% jump_videos.each do |video| %>
-     <h3> <%= video.name %> </h3>
+<section class="row">
+  <div class="small-8 columns">
+    <% @jump.videos.each do |video| %>
+      <p><strong><%= video.name %></strong></p>
       <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
-  <% if current_user.id == @jump.user_id %> 
-  <%= button_to "Delete this video", video_path(video, jump_id: video.jump_id), method: :delete, data: {confirm: "Are you sure?"} %>
-  
-  <% end %>
-<% end %>
-<h4>Here you can add another video from Youtube from this jump</h4>
-  <%= render "form" %>
-<p><%= link_to "Go back to the jump info", jump_path(@jump) %></p>
+      <% if current_user.id == @jump.user_id %> 
+        <%= link_to "Delete this video", video_path(video, jump_id: video.jump_id), method: :delete, data: {confirm: "Are you sure?"}, class: "tiny button" %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="small-8 large-4 columns">
+    <p><strong>Add new video from YouTube only.</strong></p>
+    <%= render "form" %>
+  </div>
+</section>

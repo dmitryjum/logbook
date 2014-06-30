@@ -8,7 +8,7 @@ class VideosController < ApplicationController
 
   def index
     @video = Video.new
-    @videos = @jump.videos.all
+    render :index, layout: false
   end
 
   def new
