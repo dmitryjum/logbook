@@ -1,0 +1,38 @@
+<h2>Welcome <%= @user.first_name %>!</h2>
+<br/>
+</div>
+<div class="my_jumps">
+  <table>
+    <tr>
+      <thead><th colspan="3">My jumps</th></thead>
+      <th>Jump #</th>
+      <th>Jump Date</th>
+      <th>Dropzone</th>
+    </tr>
+      <% @user.jumps.each do |j| %>
+    <tr>
+      <td><%= link_to "#{j.jump_number}", jump_path(j) %></td>
+      <td><%= j.date %></td>
+      <td><%= j.location %></td>
+    </tr>
+      <% end %>
+  </table>
+</div>
+<div class="shared_jumps">
+  <table>
+    <tr>
+      <thead><th colspan="3">Shared Jumps</th></thead>
+      <th>Jump #</th>
+      <th>Jump Date</th>
+      <th>Dropzone</th>
+    </tr>
+      <% @user.shared_jumps.each do |j| %>
+    <tr>
+      <td><%= link_to "#{j.jump_number}", jump_path(j) %></td>
+      <td><%= j.date %></td>
+      <td><%= j.location %></td>
+    </tr>
+      <% end %>
+  </table>
+</div>
+

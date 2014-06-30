@@ -2,7 +2,9 @@
   <div class="small-8 columns">
     <% @jump.videos.each do |video| %>
       <p><strong><%= video.name %></strong></p>
-      <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
+      <div class="flex-video">
+        <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
+      </div>
       <% if current_user.id == @jump.user_id %> 
         <%= link_to "Delete this video", video_path(video, jump_id: video.jump_id), method: :delete, data: {confirm: "Are you sure?"}, class: "tiny button" %>
       <% end %>

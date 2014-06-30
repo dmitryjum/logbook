@@ -1,37 +1,44 @@
-<%= form_for @jump do |f| %>
-  <div class="edit-user-fields">
-    <%= f.label :jump_number, "Enter jump number" %>
-    <%= f.number_field :jump_number %>
-    <br />
-    <%= f.label :date, "Enter the date" %>
-    <%= f.date_field :date %>
-    <br />
-    <%= f.label :location, "Enter location" %>
-    <%= f.text_field :location %>
-    <br />
-    <%= f.label :freefall_time, "Enter freefall time" %>
-    <%= f.number_field :freefall_time %>
-    <br />
-    <%= f.label :equipment, "Enter equipment" %>
-    <%= f.text_field :equipment %>
-    <br />
-    <%= f.label :aircraft, "Enter aircraft" %>
-    <%= f.text_field :aircraft %>
-    <br />
-    <%= f.label :total_freefall_time, "Enter you total freefall time" %>
-    <%= f.number_field :total_freefall_time %>
-    <br />
-    <%= f.label :notes, "Add notes" %>
-    <%= f.text_area :notes %>
-    <br />
-    <%= f.label :exit_altitude, "Add you exit alitutde" %>
-    <%= f.number_field :exit_altitude %>
-    <%= f.submit %>
-  </div>
+<section class="row">
+    <div class="small-8 large-6 columns">
+        <%= form_for @jump do |f| %>
+        <div class="edit-user-fields">
+            <%= f.label :jump_number, "Enter jump number" %>
+            <%= f.number_field :jump_number %>
+            <br />
+            <%= f.label :date, "Enter the date" %>
+            <%= f.date_field :date %>
+            <br />
+            <%= f.label :location, "Enter location" %>
+            <%= f.text_field :location %>
+            <br />
+            <%= f.label :freefall_time, "Enter freefall time" %>
+            <%= f.number_field :freefall_time %>
+            <br />
+            <%= f.label :equipment, "Enter equipment" %>
+            <%= f.text_field :equipment %>
+            <br />
+            <%= f.label :aircraft, "Enter aircraft" %>
+            <%= f.text_field :aircraft %>
+            <br />
+            <%= f.label :total_freefall_time, "Enter you total freefall time" %>
+            <%= f.number_field :total_freefall_time %>
+            <br />
+            <%= f.label :notes, "Add notes" %>
+            <%= f.text_area :notes %>
+            <br />
+            <%= f.label :exit_altitude, "Add you exit alitutde" %>
+            <%= f.number_field :exit_altitude %>
+            <%= f.submit %>
+        </div>
+    </div>
+    <div class="small-8 large-6 columns">
+        <div id="edit-user-fields">
+            <p>Choose users you want to share this jump with</p>
+            <%= f.select :shared_users, options_from_collection_for_select(User.all, :id, :email), {}, { multiple: false} %>
+        </div>
+        <% end %>
+    </div>
+</section>
+
   
-  <div id="edit-user-fields">
-    <p>Choose users you want to share this jump with</p>
-  <%= f.select :shared_users,
-  options_from_collection_for_select(User.all, :id, :email), {}, { multiple: false} %>
-  </div>
-<% end %>
+  
