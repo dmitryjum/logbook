@@ -1,5 +1,5 @@
 <p><strong>These are the jumps for this day: </strong></p>
-<ul>
+<ul id="accordion">
   <% if params[:owner] == "mine" %>
     <% @my_jumps.each do |jump| %>
       <%= render "jumps/list", jump: jump %>
@@ -14,5 +14,8 @@
   $(function(){
     addVideoContent();
     addPictureContent();
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
   });
 </script>

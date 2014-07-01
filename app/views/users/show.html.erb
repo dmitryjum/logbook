@@ -22,7 +22,7 @@
 </section>
 <section class="row" id="user-jumps">
   <div class="small-12 columns">
-    <ul>
+    <ul id="accordion">
     <% @user.jumps.each do |jump| %>
       <%= render "jumps/list", jump: jump %>
     <% end %>
@@ -33,5 +33,8 @@
   $(function(){
     addVideoContent();
     addPictureContent();
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
   });
 </script>
