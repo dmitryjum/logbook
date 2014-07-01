@@ -17,13 +17,13 @@ class VideosController < ApplicationController
 
   def create
     @video = @jump.videos.create(video_params)
-    redirect_to jump_videos_path
+    redirect_to user_path(@user)
   end
 
 
   def destroy
     @video.destroy
-    redirect_to jump_videos_path(@jump.id)
+    redirect_to user_path(@user)
   end
 
   private

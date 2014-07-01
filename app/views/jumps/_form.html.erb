@@ -1,7 +1,5 @@
-<section class="row">
-    <div class="small-8 large-6 columns">
-      <div class="new-jump-form">
         <%= form_for [@user, @jump] do |f| %>
+      <div class="new-jump-form">
         <p>Enter jump number </p>
         <%= f.number_field :jump_number %>
         <p>Enter the date </p>
@@ -11,9 +9,7 @@
         <p>Enter freefall time</p>
         <%= f.number_field :freefall_time %>
       </div>
-    </div>
 
-    <div class="small-8 large-6 columns">
       <div class="new-jump-form">
         <p>Enter equipment</p>
         <%= f.text_field :equipment %>
@@ -28,5 +24,3 @@
         <%= f.submit %>
       <% end %>
       </div>
-    </div>
-</section>

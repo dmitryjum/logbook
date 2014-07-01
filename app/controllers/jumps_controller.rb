@@ -33,7 +33,7 @@ class JumpsController < ApplicationController
       @jump.shared_users << user
     end
     @jump.update(jump_params)
-    redirect_to jump_path
+    redirect_to user_path(@user)
   end
 
   def unshare
@@ -41,7 +41,7 @@ class JumpsController < ApplicationController
     @jump.shared_users.each do |user|
       @jump.shared_users.delete(jump_user)
     end
-    redirect_to jump_path
+    redirect_to user_path(@user)
   end
 
   def sign
@@ -51,7 +51,7 @@ class JumpsController < ApplicationController
     else
       flash[:error] = "You can't sign your own jump!"
     end
-    redirect_to jump_path
+    redirect_to user_jumps_path(current_user)
   end
 
   def destroy
@@ -62,7 +62,7 @@ class JumpsController < ApplicationController
 
   def jump_day
     @my_jumps = Jump.all.mine(params[:date], @user.id)
-    @other_jumps = Jump.all.others(params[:date], @user.id)
+    @other_jumps = Jump.all.others(params[:date], @user)
     render :jump_day, layout: false
   end
 

@@ -17,13 +17,14 @@ class PicturesController < ApplicationController
   end
 
   def create
+    @user = User.find_by(id: @jump.user_id)
     @picutre = @jump.pictures.create(picture_params)
-    redirect_to jump_path(params[:jump_id])
+    redirect_to user_path(@user)
   end
 
   def destroy
     @picture.destroy
-    redirect_to jump_path(params[:jump_id])
+    redirect_to user_path(@jump.user_id)
   end
 
   private

@@ -10,5 +10,5 @@ class Jump < ActiveRecord::Base
   validates :jump_number, :presence => true
 
   scope :mine, lambda {|param, user| where(date: param).select {|jump| jump.user_id == user}}
-  scope :others, lambda {|param, user| where(date: param).select {|jump| jump.user_id != user}}
+  scope :others, lambda {|param, user| where(date: param).select {|jump| jump.shared_users.include?(user)}}
 end

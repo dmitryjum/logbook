@@ -40,11 +40,15 @@
         <tr>
           <th colspan="2">Signature:</th>
           <td colspan="4">
+            <!-- check to see if this jump has stamped signature -->
             <% signature = Signature.find_by(id: jump.signature_id) %>
+            <!-- if there is no signature in this jump and I am allowed to see it show the link to Sign method to witness this jump -->
             <% if signature == nil && jump.shared_users.include?(current_user) %>
               <%= link_to "Sign this jump, please!", sign_jump_path(jump) %>
+              <!-- if there is a signature and this jump is either mine or shared with me show the signature -->
             <% elsif signature != nil && (@user == current_user || jump.shared_users.include?(current_user)) %>
             The jump was signed by: <%= signature.user.first_name %> <%= signature.user.last_name %> <div class="signature"><%= image_tag signature.code_url %></div>
+            <!-- self-explanatory -->
             <% elsif signature == nil && @user == current_user %>
               This jump hasn't been signed yet. Share it with someone and they may sign it
             <% end %>
@@ -53,16 +57,26 @@
         <tr>
           <th colspan="1">Other</th>
           <% jump_videos = Video.where(jump_id: jump.id) %>
+          <!-- if array of this jump's videos not empty show the link to videos template -->
           <% if !jump_videos.empty? %>
           <td colspan="2"><%= link_to "Videos for this jump", jump_videos_path(jump), class: "video" %></td>
           <% else %>
+          <!-- if there is no video and this jump's user is me show the link to just new video form -->
             <% if current_user.id == jump.user_id %>
             <td colspan="2"><%= link_to "Here you can add a video from this jump", jump_videos_path(jump), class: "video" %></td>
             <% end %>
           <% end %>
-          <td colspan="2"><%= link_to "Jump Pictures", jump_pictures_path(jump), class: "pic-link" %></td>
-          <td colspan="1"><%= link_to "Edit this jump", edit_jump_path(jump) %></td>
-          <td colspan="2"><%= link_to "Delete the jump", jump_path(jump, user_id: @user.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+          <% jump_pictures = Picture.where(jump_id: jump.id) %>
+          <!-- if there are pictures for this jump and this jump is shared with me, or there are no pictures for this jump, but I am the owner - show the link to pictures and new form -->
+          <% if !jump_pictures.empty? && (jump.shared_users.include?(current_user) || current_user.id == jump.user_id) %>
+            <td colspan="2"><%= link_to "Jump Pictures", jump_pictures_path(jump), class: "pic-link" %></td>
+          <% elsif jump_pictures.empty? && current_user.id == jump.user_id %>
+            <td colspan="2"><%= link_to "Jump Pictures", jump_pictures_path(jump), class: "pic-link" %></td>
+          <% end %>
+          <% if current_user.id == jump.user_id %>
+            <td colspan="1"><%= link_to "Edit this jump", edit_jump_path(jump) %></td>
+            <td colspan="2"><%= link_to "Delete the jump", jump_path(jump, user_id: @user.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+          <% end %>
         </tr>
       </tbody>
     </table>
