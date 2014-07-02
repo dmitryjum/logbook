@@ -23,7 +23,12 @@ class VideosController < ApplicationController
 
   def destroy
     @video.destroy
-    redirect_to user_path(@user)
+    # redirect_to user_path(@user)
+    if @video.destroy
+      render json: {}
+    else
+      render status: 400, nothing: true
+    end
   end
 
   private

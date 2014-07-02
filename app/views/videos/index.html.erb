@@ -1,13 +1,15 @@
 <section class="row">
   <div class="small-8 columns">
     <% @jump.videos.each do |video| %>
+    <div id="<%= video.id %>">
       <p><strong><%= video.name %></strong></p>
       <div class="flex-video">
         <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
       </div>
       <% if current_user.id == @jump.user_id %> 
-        <%= link_to "Delete this video", video_path(video, jump_id: video.jump_id), method: :delete, data: {confirm: "Are you sure?"}, class: "tiny button" %>
+        <a href="#" class="delete-video tiny button">Delete this video</a>
       <% end %>
+    </div>
     <% end %>
   </div>
   <div class="small-8 large-4 columns">
@@ -15,3 +17,8 @@
     <%= render "form" %>
   </div>
 </section>
+<script type="text/javascript">
+  $(function(){
+    deleteVideo("<%= @jump.id %>");
+  });
+</script>
