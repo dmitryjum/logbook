@@ -17,7 +17,10 @@ class VideosController < ApplicationController
 
   def create
     @video = @jump.videos.create(video_params)
-    redirect_to user_path(@user)
+    respond_to do |format|
+      format.html {redirect_to user_path(@user)}
+      format.json {render json: @video}
+    end
   end
 
 

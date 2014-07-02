@@ -13,30 +13,49 @@ function addVideoContent() {
     link = $(this).attr("href");
     // videoDiv.empty();
     videoDiv.toggle("fast", function(){
-      videoDiv.load(link);
       curLi.appendChild(videoDiv[0]);
+      videoDiv.load(link, function() {
+      deleteVideo(curLi.id);
+      uploadVideo(curLi.id);        
+      });
     })
   });
 };
 
 function deleteVideo(jumpId) {
   var videos = $("div:has(a.delete-video)");
-  var videoId;
-  var curDiv;
   videos.on("click", "a.delete-video", function(e) {
     e.preventDefault();
-    curDiv = this.parentNode;
-    videoId = curDiv.id;
-    $.ajax({
+    var curDiv = this.parentNode;
+    var videoId = curDiv.id;
+     $.ajax({
       type: "DELETE",
       url: "/videos/" + videoId,
       data: {"jump_id": jumpId},
       success: function() {
         curDiv.remove();
+        console.log("Deleted!")
       }
     })
   });
 }
+
+function uploadVideo(jumpId) {
+  var videoForm = $("div:has(form.new_video)");
+  videoForm.on("click", "a.submit-video", function(e) {
+    e.preventDefault();
+    var videoName = videoForm.find("#video_name").val();
+    var videoUrl = videoForm.find("#video_video_url").val();
+    $.ajax({
+      type: "POST",
+      url: "/jumps/" + jumpId + "/videos",
+      data: {video: {"name": videoName, "video_url": videoUrl}},
+      success: function() {
+        videoDiv.load(link);
+      }
+    })
+  })
+};
 
 function addPictureContent() {
   picCells = $("li:has(a.pic-link)");
