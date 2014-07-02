@@ -1,5 +1,7 @@
   <li id="<%= jump.id %>">
-    <h3><%= jump.jump_number %></h3>
+    <% performer = User.find_by(id: jump.user_id) %>
+    <!-- jquery accordion requires this header -->
+    <h3>#<%= jump.jump_number %> | Performer: <%= performer.first_name %> <%= performer.last_name %> | Location: <%= jump.location %> | Date: <%= jump.date %></h3>
     <table>
       <thead>
         <tr>
@@ -76,7 +78,7 @@
           <% end %>
           <% if current_user.id == jump.user_id %>
             <td colspan="1"><%= link_to "Edit this jump", edit_jump_path(jump) %></td>
-            <td colspan="2"><%= link_to "Delete the jump", jump_path(jump, user_id: @user.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+            <td colspan="2"><a href="#" class="delete-jump">Delete the jump</a></td>
           <% end %>
         </tr>
       </tbody>

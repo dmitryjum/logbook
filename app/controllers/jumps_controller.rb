@@ -21,6 +21,10 @@ class JumpsController < ApplicationController
   def show
     @picture = Picture.new
     @signature = Signature.find_by(id: @jump.signature_id)
+    respond_to do |format|
+      format.html {render :show}
+      format.json {render json: @jump}
+    end
   end
 
   def edit
@@ -55,9 +59,14 @@ class JumpsController < ApplicationController
   end
 
   def destroy
-    @user = @jump.user_id
+    # @user = @jump.user_id
     @jump.destroy
-    redirect_to user_jumps_path(@user)
+    # redirect_to user_jumps_path(@user)
+    if @jump.destroy
+      render json: {}
+    else
+      render status: 400, nothing: true
+    end
   end
 
   def jump_day

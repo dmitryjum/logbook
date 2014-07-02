@@ -25,3 +25,55 @@ function addOtherJumps() {
     })
   })
 };
+
+function changeCounter(jump) {
+  var mineField = $("#" + jump.date).find(".mine");
+  var mineFieldTextArr = mineField.text().split(" ");
+  mineFieldTextArr[2] = parseInt(mineFieldTextArr[2]) - 1;
+  if (mineFieldTextArr[2] <= 0) {
+    mineField.parent().remove();
+  } else {
+    mineField.text(mineFieldTextArr.join(" "))
+  };
+};
+
+function deleteJumpUsershow(userid) {
+  var deleteLi = $('li:has(a.delete-jump)');
+  var jumpId;
+  var curLi;
+  deleteLi.on("click", "a.delete-jump", function(e) {
+    e.preventDefault();
+    curLi = this.parentNode.parentNode.parentNode.parentNode.parentNode;
+    jumpId = curLi.id;
+    $.ajax({
+      type: "DELETE",
+      url: "/jumps/" + jumpId,
+      success: function() {
+        curLi.remove();
+      }
+    })
+  })
+};
+
+function deleteJumpJumpday(userid) {
+  var deleteLi = $('li:has(a.delete-jump)');
+  var jump;
+  var jumpId;
+  var curLi;
+  deleteLi.on("click", "a.delete-jump", function(e) {
+    e.preventDefault();
+    curLi = this.parentNode.parentNode.parentNode.parentNode.parentNode;
+    jumpId = curLi.id;
+    $.getJSON("/jumps/" + jumpId, function(response) {
+      jump = response;
+    });
+    $.ajax({
+      type: "DELETE",
+      url: "/jumps/" + jumpId,
+      success: function() {
+        curLi.remove();
+        changeCounter(jump);
+      }
+    })
+  })
+};
