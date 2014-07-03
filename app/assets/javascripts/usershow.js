@@ -14,46 +14,48 @@ function addVideoContent() {
     // videoDiv.empty();
     videoDiv.toggle("fast", function(){
       curLi.appendChild(videoDiv[0]);
-      videoDiv.load(link, function() {
-      deleteVideo(curLi.id);
-      uploadVideo(curLi.id);        
-      });
-    })
+      videoDiv.load(link);
+    });
   });
 };
 
 function deleteVideo(jumpId) {
   var videos = $("div:has(a.delete-video)");
   videos.on("click", "a.delete-video", function(e) {
+    e.stopPropagation();
     e.preventDefault();
     var curDiv = this.parentNode;
     var videoId = curDiv.id;
-     $.ajax({
-      type: "DELETE",
-      url: "/videos/" + videoId,
-      data: {"jump_id": jumpId},
-      success: function() {
-        curDiv.remove();
-        console.log("Deleted!")
-      }
-    })
+    if (curDiv) {
+      $.ajax({
+        type: "DELETE",
+        url: "/videos/" + videoId,
+        data: {"jump_id": jumpId},
+        success: function() {
+          curDiv.remove();        }
+      })
+    };
   });
-}
+};
 
 function uploadVideo(jumpId) {
   var videoForm = $("div:has(form.new_video)");
   videoForm.on("click", "a.submit-video", function(e) {
+    e.stopPropagation();
     e.preventDefault();
     var videoName = videoForm.find("#video_name").val();
     var videoUrl = videoForm.find("#video_video_url").val();
-    $.ajax({
-      type: "POST",
-      url: "/jumps/" + jumpId + "/videos",
-      data: {video: {"name": videoName, "video_url": videoUrl}},
-      success: function() {
-        videoDiv.load(link);
-      }
+    $.post("/jumps/" + jumpId + "/videos",{video: {name: videoName, video_url: videoUrl}}).done(function() {
+      videoDiv.load(link);
     })
+    // $.ajax({
+    //   type: "POST",
+    //   url: "/jumps/" + jumpId + "/videos",
+    //   data: {video: {"name": videoName, "video_url": videoUrl}},
+    //   success: function() {
+    //     videoDiv.load(link);
+    //   }
+    // })
   })
 };
 

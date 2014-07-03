@@ -39,11 +39,13 @@
       </nav>
     </div>
   </header>
-
+ 
     <%= yield %>
+    
     <%= javascript_tag("$(function(){ $(document).foundation(); });") %>
     <% if !logged_in? %>
       <%= javascript_tag("loginPlaceholders();") %>
     <% end %>
+
   </body>
 </html>

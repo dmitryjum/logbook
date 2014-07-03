@@ -7,7 +7,7 @@
         <iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
       </div>
       <% if current_user.id == @jump.user_id %> 
-        <a href="#" class="delete-video tiny button">Delete this video</a>
+        <a class="delete-video tiny button">Delete this video</a>
       <% end %>
     </div>
     <% end %>
@@ -18,8 +18,8 @@
   </div>
 </section>
 <script type="text/javascript">
-  // $(function(){
-  //   deleteVideo("<%= @jump.id %>");
-  //   uploadVideo("<%= @jump.id %>");
-  // });
+  $(function(){
+    deleteVideo("<%= @jump.id %>");
+    uploadVideo("<%= @jump.id %>");
+  });
 </script>

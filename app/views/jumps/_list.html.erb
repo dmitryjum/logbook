@@ -35,7 +35,7 @@
           <td colspan="6">
             <% if current_user.id == jump.user_id %>
               <% jump.shared_users.each do |user| %>
-                <%= user.first_name %><span><%= link_to "X", unshare_jump_path(jump, jump_user_id: user.id) %></span>
+                <span><%= user.first_name %> <%= link_to "X", unshare_jump_path(jump, jump_user_id: user.id) %></span>
               <% end %>
             <% end %>
           </td>
