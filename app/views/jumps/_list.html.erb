@@ -31,11 +31,11 @@
           <td colspan="6"><%= jump.notes %></td>
         </tr>
         <tr>
-          <th colspan="2">Useres the jumped shared with:</th>
+          <th colspan="2">Users the jump shared with:</th>
           <td colspan="6">
             <% if current_user.id == jump.user_id %>
               <% jump.shared_users.each do |user| %>
-                <span><%= user.first_name %> <%= link_to "X", unshare_jump_path(jump, jump_user_id: user.id) %></span>
+                <span id="<%= user.id %>"><%= user.first_name %> <a class="unshare-jump">X</a></span>
               <% end %>
             <% end %>
           </td>

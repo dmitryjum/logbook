@@ -62,9 +62,7 @@ class JumpsController < ApplicationController
   end
 
   def destroy
-    # @user = @jump.user_id
     @jump.destroy
-    # redirect_to user_jumps_path(@user)
     if @jump.destroy
       render json: {}
     else

@@ -53,6 +53,28 @@ function signJump(userFirstName, userLastName) {
       $(curTd).append("The jump was signed by " + userFirstName + " " + userLastName + "<div class='signature'><img src=" + signature.code_url + "></div>");
     })
   })
+};
+
+function unshareJump() {
+  var unshareLi = $("li:has(a.unshare-jump)");
+  var jumpId;
+  var curLi;
+  var curSpan;
+  unshareLi.on("click", "a.unshare-jump", function(e) {
+    e.preventDefault();
+    curSpan = this.parentNode;
+    jumpUserId = curSpan.id;
+    curLi = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+    jumpId = curLi.id;
+    $.ajax({
+      type: "GET",
+      url: "/jumps/" + jumpId + "/unshare",
+      data: {jump_user_id: jumpUserId},
+      success: function() {
+        $(curSpan).empty();
+      }
+    })
+  })
 }
 
 function deleteJumpUsershow(userid) {
