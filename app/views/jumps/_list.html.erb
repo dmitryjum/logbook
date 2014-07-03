@@ -35,7 +35,7 @@
           <td colspan="6">
             <% if current_user.id == jump.user_id %>
               <% jump.shared_users.each do |user| %>
-                <span id="<%= user.id %>"><%= user.first_name %> <a class="unshare-jump">X</a></span>
+                <span id="<%= user.id %>"><%= user.first_name %> <a data-tooltip class="unshare-jump has-tip" title="Unshare this jump with this user.">X</a></span>
               <% end %>
             <% end %>
           </td>
