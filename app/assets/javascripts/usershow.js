@@ -11,7 +11,7 @@ function addVideoContent() {
     curLi = this.parentNode.parentNode.parentNode.parentNode.parentNode;
     console.log(curLi);
     link = $(this).attr("href");
-    // videoDiv.empty();
+    videoDiv.empty();
     videoDiv.toggle("fast", function(){
       curLi.appendChild(videoDiv[0]);
       videoDiv.load(link);
@@ -67,7 +67,7 @@ function addPictureContent() {
     curLi = this.parentNode.parentNode.parentNode.parentNode.parentNode;
     console.log(curLi);
     var link = $(this).attr("href");
-    // picDiv.empty();
+    picDiv.empty();
     picDiv.toggle("fast", function(){
       picDiv.load(link);
       curLi.appendChild(picDiv[0]);

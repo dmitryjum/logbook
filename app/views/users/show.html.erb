@@ -5,7 +5,7 @@
       <%= image_tag(@user.avatar.url) %>
     </div>
     <% if @signature != nil %>
-    My signature: <%= image_tag @signature.code_url %>
+    <strong>My signature: </strong> <%= image_tag @signature.code_url, id: "signature" %>
     <% end %>
   </div>
   <div class="small-12 large-6 columns">
@@ -22,7 +22,7 @@
 </section>
 <section class="row" id="user-jumps">
   <div class="small-12 columns">
-    <ul id="accordion">
+    <ul id="accordion" class="jump-item">
     <% @user.jumps.each do |jump| %>
       <%= render "jumps/list", jump: jump %>
     <% end %>

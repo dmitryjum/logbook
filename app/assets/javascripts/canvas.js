@@ -67,7 +67,9 @@ function saveUpdate(userid) {
       type: "POST",
       url: "/users/" + userid + "/signatures",
       data: {signature: {"code_url": code}}
-    })
+    }).done(function() {
+      alert("I've got your signature!")
+    });
   };
 
   function updateSignature(signatureId, code) {
@@ -75,7 +77,9 @@ function saveUpdate(userid) {
       type: "PUT",
       url: "/users/" + userid + "/signatures/" + signatureId,
       data: {signature: {"code_url": code}}
-    })
+    }).done(function() {
+      alert("I've got your new signature!")
+    });
   };
 
   function getAllSignatures() {

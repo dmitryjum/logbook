@@ -125,11 +125,9 @@ body {
 /***Jumps table***/
 /*****************/
 
-.my_jumps th{
+/*.my_jumps th{
   border: 2px solid white;
-  }
-
- 
+  }*/
 
  .jump_pictures img {
   width: 200px;
@@ -145,20 +143,76 @@ body {
   display: inline-block;
  }
 
- .jump_list {
+ /*.jump_list {
   float: right;
   margin: -250px 0px 0px 0px;
- }
+ }*/
 
  .picture_show {
-  position: relative;
-  margin-left: 10%;
-  margin-top: 5%;
+  margin: 2em auto;
  }
 
  .picture_show img {
-  height:600px;
+  /*height:600px;*/
   border-radius: 10px;
+ }
+
+ /************************/
+ /******Picture comments**/
+ /************************/
+
+
+ #comment-list ul {
+  list-style-type: none;
+  margin: 0 auto;
+ }
+
+ .reply_wrapper {
+  margin: .5em;
+  padding: .5em;
+  background-color: rgba(43, 182, 226, 0.34);
+  border-radius: 5px;
+ }
+
+ .reply_image {
+  position: relative;
+  vertical-align: initial;
+ }
+
+ .reply_info {
+  display: inline-block;
+  margin: 1em;
+  width: 85%;
+ }
+
+ .reply_info p {
+  margin: 0em;
+ }
+
+ .reply_table {
+  border-top: 1px solid black;
+ }
+
+ .reply_author {
+  color: #EDCC64;
+ }
+
+ .reply_date {
+  color: #D6C3C3;
+ }
+
+ .delete_comment a {
+  color: red;
+ }
+
+ #comment-form {
+  width: 95%;
+  margin: 0 auto;
+ }
+
+ #comment-form p {
+  margin: 5px;
+  color: #EDCC64;
  }
 
 /*************************/
@@ -229,8 +283,9 @@ table tr.even, table tr.alt, table tr:nth-of-type(even) {
   font-size: 11px;
   text-align: center;
 }
-
+/****************/
 /*avatar styles */
+/****************/
 
 .avatar {
   width: 320px;
@@ -273,7 +328,8 @@ canvas {
 
 #signature {
   display: inline-block;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.52);
+  margin: 1em;
 }
 
 .new-edit-user {
@@ -284,6 +340,10 @@ canvas {
 
 #jumps-index {
   margin: 1em;
+}
+
+.jump-item {
+  margin-bottom: 1em; /* margin for each jump in the list*/
 }
 
  

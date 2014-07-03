@@ -1,40 +1,60 @@
-<%= link_to "Go back the the jump description", jump_path(@jump) %>
-<div class="picture_show">
-  <% unless @picture.picture_url.empty? %>
-    <%= image_tag @picture.picture_url %>
-  <% else %>
-    <%= image_tag @picture.image_file.url %>
-  <% end %>
-  
-  <% if current_user.id == @jump.user_id %>
-    <%= button_to "Delete this picture",
-     picture_path(@picture, jump_id: params[:jump_id]),
-      method: :delete %>
-  <% end %>
-</div>
-<div class="comments">
-  <div id="comment-list">
-    <ul>
-      <% @comments.each do |c| %>
-      <li>
-        <ul>
-          <li><strong>Author</strong>:<%= c.user.first_name %> <%= c.user.last_name %> <%= image_tag c.user.avatar.url(:thumb) %></li>
-          <li><strong>Comment</strong>: <%= c.comment %>. <strong></li>
-          <li>Date</strong>: <%= c.created_at %></li>
-        <% if current_user == c.user %>
-          <li><%= link_to "X", picture_comment_path(c, picture_id: @picture.id), method: :delete %>
-          </li>
-        <% end %>
-        </ul>
-     </li>
+<section class="row">
+  <div class="small-12 columns">
+    <div class="picture_show">
+      <% unless @picture.picture_url.empty? %>
+        <%= image_tag @picture.picture_url %>
+      <% else %>
+        <%= image_tag @picture.image_file.url %>
       <% end %>
-    </ul>
+      
+      <% if current_user.id == @jump.user_id %>
+        <%= button_to "Delete this picture",
+         picture_path(@picture, jump_id: params[:jump_id]),
+          method: :delete %>
+      <% end %>
+    </div>
   </div>
-  <div id="comment-form">
-    <%= form_for [@picture, @comment] do |f| %>
-    <p>Enter your comment here</p>
-    <%= f.text_area :comment %>
-    <%= f.submit %>
-    <% end %>
+</section>
+
+<section class="row">
+  <div class="small-12 columns">
+    <div id="comment-list">
+      <ul>
+        <% @comments.each do |c| %>
+        <li>
+          <div class="reply_table">
+            <div class="reply_wrapper">
+                <%= image_tag c.user.avatar.url(:thumb), class: "reply_image" %>
+              <div class="reply_info">
+                <p class="reply_author"><strong><%= c.user.first_name %> <%= c.user.last_name %></strong></p>
+                <p class="prely_text">
+                  <%= c.comment %>
+                </p>
+                <p class="reply_date"><%= c.created_at %>
+                <% if current_user == c.user %>
+                  <span class="delete_comment"><%= link_to "X", picture_comment_path(c, picture_id: @picture.id), method: :delete %></span>
+                <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
+</section>
+
+<section class="row">
+  <div class="small-12 columns">
+    <div id="comment-form">
+      <%= form_for [@picture, @comment] do |f| %>
+      <p>Enter your comment here</p>
+      <%= f.text_area :comment %>
+      <strong><%= f.submit class: "tiny button" %></strong>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
