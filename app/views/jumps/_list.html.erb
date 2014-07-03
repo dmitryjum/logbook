@@ -1,7 +1,7 @@
   <li id="<%= jump.id %>">
     <% performer = User.find_by(id: jump.user_id) %>
     <!-- jquery accordion requires this header -->
-    <h3>#<%= jump.jump_number %> | Performer: <%= performer.first_name %> <%= performer.last_name %> | Location: <%= jump.location %> | Date: <%= jump.date %></h3>
+    <h3>#<%= jump.jump_number %> | Performer: <%= performer.first_name %> <%= performer.last_name %> | Location: <%= jump.location %> | Date: <%= jump.date %> | Pictures: <%= jump.pictures.length %> | Videos: <%= jump.videos.length %></h3>
     <table>
       <thead>
         <tr>
