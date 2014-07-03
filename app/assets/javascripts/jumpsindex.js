@@ -13,6 +13,18 @@ function addMyJumps() {
   })
 };
 
+function addAllOtherJumps() {
+  allSharedLink = $("#allothers");
+  listDiv = $(".jumpList");
+  allSharedLink.on("click", function(e) {
+    e.preventDefault();
+    var link = $(this).attr("href");
+    listDiv.toggle("fast", function(){
+      listDiv.load(link);
+    })
+  })
+};
+
 function addOtherJumps() {
   otherUls = $("ul:has(a.others)");
   listDiv = $(".jumpList");

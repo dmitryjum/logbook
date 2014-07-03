@@ -28,8 +28,13 @@
     </div>
   </div>
 
-  <div class="small-12 large-8 columns jumpList">
-    
+  <div class="small-12 large-8 columns">
+    <ul class="breadcrumbs">
+      <li><%= link_to "All shared jumps", jump_day_user_jumps_path(@user, owner: "allothers"), id: "allothers" %></li>
+    </ul>
+    <div class="jumpList">
+      
+    </div>
   </div>
 </section>
 
@@ -38,5 +43,6 @@
     // load templates with jumps beside calendar
     addMyJumps();
     addOtherJumps();
+    addAllOtherJumps();
   });
 </script>

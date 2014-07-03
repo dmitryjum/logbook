@@ -73,6 +73,7 @@ class JumpsController < ApplicationController
   def jump_day
     @my_jumps = Jump.all.mine(params[:date], @user.id)
     @other_jumps = Jump.all.others(params[:date], @user)
+    @all_other_jumps = Jump.all.allothers(@user)
     render :jump_day, layout: false
   end
 

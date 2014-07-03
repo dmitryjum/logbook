@@ -11,4 +11,5 @@ class Jump < ActiveRecord::Base
 
   scope :mine, lambda {|param, user| where(date: param).select {|jump| jump.user_id == user}}
   scope :others, lambda {|param, user| where(date: param).select {|jump| jump.shared_users.include?(user)}}
+  scope :allothers, lambda {|user| select {|jump| jump.shared_users.include?(user)}}
 end
