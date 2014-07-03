@@ -50,12 +50,15 @@ class JumpsController < ApplicationController
 
   def sign
     @signature = current_user.signatures.first
-    if current_user != @jump_user
+    if current_user != @user
       @signature.jumps << @jump
     else
       flash[:error] = "You can't sign your own jump!"
     end
-    redirect_to user_jumps_path(current_user)
+    respond_to do |format|
+      format.html {redirect_to user_jumps_path(current_user)}
+      format.json {render json: @signature}
+    end
   end
 
   def destroy

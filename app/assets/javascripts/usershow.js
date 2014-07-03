@@ -32,7 +32,8 @@ function deleteVideo(jumpId) {
         url: "/videos/" + videoId,
         data: {"jump_id": jumpId},
         success: function() {
-          curDiv.remove();        }
+          curDiv.remove();
+        }
       })
     };
   });
@@ -48,14 +49,6 @@ function uploadVideo(jumpId) {
     $.post("/jumps/" + jumpId + "/videos",{video: {name: videoName, video_url: videoUrl}}).done(function() {
       videoDiv.load(link);
     })
-    // $.ajax({
-    //   type: "POST",
-    //   url: "/jumps/" + jumpId + "/videos",
-    //   data: {video: {"name": videoName, "video_url": videoUrl}},
-    //   success: function() {
-    //     videoDiv.load(link);
-    //   }
-    // })
   })
 };
 

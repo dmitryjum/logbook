@@ -14,6 +14,7 @@
   $(function(){
     addVideoContent();
     addPictureContent();
+    signJump("<%= @user.first_name %>", "<%= @user.last_name %>");
     deleteJumpJumpday("<%= @user.id %>");
     $( "#accordion" ).accordion({
       collapsible: true

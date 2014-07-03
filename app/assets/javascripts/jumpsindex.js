@@ -37,6 +37,24 @@ function changeCounter(jump) {
   };
 };
 
+function signJump(userFirstName, userLastName) {
+  var signLi = $("li:has(a.sign-jump)");
+  var jumpId;
+  var curLi;
+  var curTd;
+  signLi.on("click", "a.sign-jump", function(e) {
+    e.preventDefault();
+    curTd = this.parentNode;
+    curLi = this.parentNode.parentNode.parentNode.parentNode.parentNode;
+    jumpId = curLi.id;
+    $.getJSON("/jumps/" + jumpId + "/sign", function(response) {
+      var signature = response;
+      $(curTd).empty();
+      $(curTd).append("The jump was signed by " + userFirstName + " " + userLastName + "<div class='signature'><img src=" + signature.code_url + "></div>");
+    })
+  })
+}
+
 function deleteJumpUsershow(userid) {
   var deleteLi = $('li:has(a.delete-jump)');
   var jumpId;

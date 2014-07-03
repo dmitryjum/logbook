@@ -47,9 +47,10 @@
             <% signature = Signature.find_by(id: jump.signature_id) %>
             <!-- if there is no signature in this jump and I am allowed to see it show the link to Sign method to witness this jump -->
             <% if signature == nil && jump.shared_users.include?(current_user) %>
-              <%= link_to "Sign this jump, please!", sign_jump_path(jump) %>
+              <a class="sign-jump">Sign this jump please!</a>
               <!-- if there is a signature and this jump is either mine or shared with me show the signature -->
             <% elsif signature != nil && (@user == current_user || jump.shared_users.include?(current_user)) %>
+
             The jump was signed by: <%= signature.user.first_name %> <%= signature.user.last_name %> <div class="signature"><%= image_tag signature.code_url %></div>
             <!-- self-explanatory -->
             <% elsif signature == nil && @user == current_user %>
