@@ -3,14 +3,25 @@
 ### GA WDI NYC Jan14, Project 1
 ### Overview
 
-**Logbook** is a interactive skydiving logbook. Which can conatain many users and each user has his own logbok. He can log jumps, edit details of jumps (as jump number, equipment and aircraft that were used etc...). Add pictures and videos for each jump. Logbook was developed as my first WDI project in January 2014. It was developed over a 5 day sprint. It's planned to be in further development to improve overall design and style, add user-to-user interactive features as possibly comments and ability to witness-sign another user's jump.
+**Logbook** is a interactive skydiving logbook. Which can conatain many users and each user has his own logbok. He can log jumps, edit details of jumps (as jump number, equipment and aircraft that were used etc...). Add pictures and videos for each jump. Leave comments on pictures. Share jump details including pictures and videos with other users giving them just view permision. User can draw his personal signature and witness-stamp jumps that are shared with him. User can browes through his and other jumps through interactive calendar.
 
 ### Technologies Used
+Back-end:
 
-Ruby 2.1.0
-Ruby on Rails 4.0.2
-PostgreSQL Database
-Authentication and Authorization using [bcrypt-ruby]
+*Ruby 2.1.0
+*Ruby on Rails 4.0.2
+*PostgreSQL Database
+*Authentication and Authorization using [bcrypt-ruby]
+*paperclip gem for image upload
+*AWS S3 storage to store images
+
+Front-end:
+*jQuery AJAX
+*jQuery UI Accordion
+*HTML5
+*CSS3
+*HTML5 Canvas for user's signature
+*Zurb Foundation Framework
 
 ### User Stories Completed
 
