@@ -8,20 +8,20 @@
 ### Technologies Used
 Back-end:
 
-*Ruby 2.1.0
-*Ruby on Rails 4.0.2
-*PostgreSQL Database
-*Authentication and Authorization using [bcrypt-ruby]
-*paperclip gem for image upload
-*AWS S3 storage to store images
+* Ruby 2.1.0
+* Ruby on Rails 4.0.2
+* PostgreSQL Database
+* Authentication and Authorization using [bcrypt-ruby]
+* paperclip gem for image upload
+* AWS S3 storage to store images
 
 Front-end:
-*jQuery AJAX
-*jQuery UI Accordion
-*HTML5
-*CSS3
-*HTML5 Canvas for user's signature
-*Zurb Foundation Framework
+* jQuery AJAX
+* jQuery UI Accordion
+* HTML5
+* CSS3
+* HTML5 Canvas for user's signature
+* Zurb Foundation Framework
 
 ### User Stories Completed
 
