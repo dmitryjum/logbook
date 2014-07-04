@@ -51,13 +51,14 @@
       <%= form_for [@picture, @comment] do |f| %>
       <p>Enter your comment here</p>
       <%= f.text_area :comment %>
-      <strong><%= f.submit class: "tiny button" %></strong>
+      <a class="tiny button" id="submit-comment">Post</a>
       <% end %>
     </div>
   </div>
 </section>
 <script type="text/javascript">
   deleteComment("<%= @picture.id %>");
+  postComment("<%= @picture.id %>", "<%= current_user.avatar.url(:thumb) %>");
 </script>
 
 

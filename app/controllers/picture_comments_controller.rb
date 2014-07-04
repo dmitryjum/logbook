@@ -9,7 +9,12 @@ class PictureCommentsController < ApplicationController
     @comment = @picture.picture_comments.new(comment_params)
     @comment.user_id = current_user.id
     @comment.save
-    redirect_to picture_path(params[:picture_id], jump_id: @jump.id)
+    if @comment.save
+      render json: [@comment, @comment.user]
+    else
+      render status: 400, nothing: true
+    end
+    # redirect_to picture_path(params[:picture_id], jump_id: @jump.id)
   end
 
   def update
