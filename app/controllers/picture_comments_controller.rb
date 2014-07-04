@@ -19,7 +19,12 @@ class PictureCommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to picture_path(id: @picture.id, jump_id: @jump.id)
+    # redirect_to picture_path(id: @picture.id, jump_id: @jump.id)
+    if @comment.destroy
+      render json: {}
+    else
+      render status: 400, nothing: true
+    end
   end
 
   private

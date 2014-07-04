@@ -49,9 +49,13 @@
             <% if signature == nil && jump.shared_users.include?(current_user) %>
               <a class="sign-jump">Sign this jump please!</a>
               <!-- if there is a signature and this jump is either mine or shared with me show the signature -->
-            <% elsif signature != nil && (@user == current_user || jump.shared_users.include?(current_user)) %>
+            <% elsif signature != nil && signature.user != nil && (@user == current_user || jump.shared_users.include?(current_user)) %>
 
             The jump was signed by: <%= signature.user.first_name %> <%= signature.user.last_name %> <div class="signature"><%= image_tag signature.code_url %></div>
+
+            <% elsif signature != nil && signature.user == nil && (@user == current_user || jump.shared_users.include?(current_user)) %>
+
+            The person who signed this jump removed his account from Skydive Pages, but his signature still remains. <div class="signature"><%= image_tag signature.code_url %></div>
             <!-- self-explanatory -->
             <% elsif signature == nil && @user == current_user %>
               This jump hasn't been signed yet. Share it with someone and they may sign it

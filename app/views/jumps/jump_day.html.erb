@@ -1,16 +1,22 @@
 <ul id="accordion">
   <% if params[:owner] == "mine" %>
+
     <% @my_jumps.each do |jump| %>
       <%= render "jumps/list", jump: jump %>
     <% end %>
+
   <% elsif params[:owner] == "others" %>
+
     <% @other_jumps.each do |jump| %>
       <%= render "jumps/list", jump: jump %>
     <% end %>
+
   <% elsif params[:owner] == "allothers" %>
+  
     <% @all_other_jumps.each do |jump| %>
       <%= render "jumps/list", jump: jump %>
     <% end %>
+
   <% end %>
 </ul>
 <script type="text/javascript">

@@ -21,7 +21,7 @@
     <div id="comment-list">
       <ul>
         <% @comments.each do |c| %>
-        <li>
+        <li id="<%= c.id %>">
           <div class="reply_table">
             <div class="reply_wrapper">
                 <%= image_tag c.user.avatar.url(:thumb), class: "reply_image" %>
@@ -32,7 +32,7 @@
                 </p>
                 <p class="reply_date"><%= c.created_at %>
                 <% if current_user == c.user %>
-                  <span class="delete_comment"><%= link_to "X", picture_comment_path(c, picture_id: @picture.id), method: :delete %></span>
+                  <a class="delete_comment">X</a>
                 <% end %>
                 </p>
               </div>
@@ -56,5 +56,8 @@
     </div>
   </div>
 </section>
+<script type="text/javascript">
+  deleteComment("<%= @picture.id %>");
+</script>
 
 
