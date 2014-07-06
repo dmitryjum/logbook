@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "user can add picture" do
+feature "user can add picture" do
   let!(:creator) { FactoryGirl.create(:user) }
   let!(:jumpone) { FactoryGirl.create(:jump) }
   let!(:jumppic) { FactoryGirl.create(:picture) }

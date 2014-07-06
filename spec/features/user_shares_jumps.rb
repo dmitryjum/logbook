@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "a user can share a jump" do
+feature "a user can share a jump" do
    let!(:creator) { FactoryGirl.create(:user) }
    let!(:shared) { FactoryGirl.create(:user) }
    let!(:some_other_user) { FactoryGirl.create(:user) } 

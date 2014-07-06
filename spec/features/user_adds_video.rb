@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "user can add video" do
+feature "user can add video" do
   let!(:creator) { FactoryGirl.create(:user) }
   let!(:jumpone) { FactoryGirl.create(:jump) }
   let!(:jumpvid) { FactoryGirl.create(:video) }

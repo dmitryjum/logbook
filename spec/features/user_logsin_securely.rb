@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "a user can login securely" do
+feature "a user can login securely" do
     let!(:creator) { FactoryGirl.create(:user) }
     let!(:some_other_user) { FactoryGirl.create(:user) }
 

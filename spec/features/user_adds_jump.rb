@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "user can add a jump" do
+feature "user can add a jump" do
   let!(:creator) { FactoryGirl.create(:user) }
   let!(:jumpone) { FactoryGirl.create(:jump) }
 
