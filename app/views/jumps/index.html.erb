@@ -13,7 +13,7 @@
           <%= date.day %>
         <% my_jumps = Jump.where(date: date).select {|jump| jump.user_id == current_user.id} %>
         <!-- other jumps that are shared with me only -->
-        <% other_jumps = Jump.where(date: date).select {|jump| jump.shared_users.include?(current_user)} %>
+        <% other_jumps = Jump.where(date: date).select {|jump| jump.shared_users.include?(current_user) && User.exists?(jump.user_id)} %>
       <ul>
         <!-- show link and counter for my jumps if only they exist for current day cell in calendar -->
         <% if my_jumps.length > 0 %>
